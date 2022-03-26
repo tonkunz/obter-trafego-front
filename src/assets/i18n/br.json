@@ -14,7 +14,7 @@
     "welcome-message": "Bem vindo ao",
     "welcome-text": "Contrate, crie e analise facilmente suas campanhas de acesso, pagamentos e pacotes escolhidos de maneira simples, clara e confiável.",
     "errors": {
-      "email-required": "Email address é obrigatório",
+      "email-required": "Email é obrigatório",
       "email-invalid": "Por favor, coloque um e-mail válido",
       "password-required": "A senha é obrigatória"
     }
