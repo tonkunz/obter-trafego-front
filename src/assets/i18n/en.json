@@ -1,5 +1,22 @@
 {
-    "welcome-back": "Welcome back",
-    "Project": "Project",
-    "Analytics": "Analytics"
+  "obter-traffic": "ObterTraffic",
+  "welcome-back": "Welcome back",
+  "Project": "Project",
+  "Analytics": "Analytics",
+  "password": "Password",
+  "sign-in": {
+    "sign-in": "Sign In",
+    "create-acc-text": "Don't have an account?",
+    "sign-up": "Sign Up",
+    "email-address": "Email address",
+    "remember-me": "Remember Me",
+    "forgot-password": "Forgot password?",
+    "welcome-message": "Welcome to",
+    "welcome-text": "Easily hire, create and analyze your chosen access campaigns, payments and packages in a simple, clear and reliable way.",
+    "errors": {
+      "email-required": "Email address is required",
+      "email-invalid": "Please enter a valid email address",
+      "password-required": "Password is required"
+    }
+  }
 }

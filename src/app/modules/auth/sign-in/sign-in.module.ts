@@ -11,24 +11,22 @@ import { FuseAlertModule } from '@fuse/components/alert';
 import { SharedModule } from 'app/shared/shared.module';
 import { AuthSignInComponent } from 'app/modules/auth/sign-in/sign-in.component';
 import { authSignInRoutes } from 'app/modules/auth/sign-in/sign-in.routing';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
-    declarations: [
-        AuthSignInComponent
-    ],
-    imports     : [
-        RouterModule.forChild(authSignInRoutes),
-        MatButtonModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatProgressSpinnerModule,
-        FuseCardModule,
-        FuseAlertModule,
-        SharedModule
-    ]
+  declarations: [AuthSignInComponent],
+  imports: [
+    RouterModule.forChild(authSignInRoutes),
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    FuseCardModule,
+    FuseAlertModule,
+    SharedModule,
+    TranslocoModule,
+  ],
 })
-export class AuthSignInModule
-{
-}
+export class AuthSignInModule {}

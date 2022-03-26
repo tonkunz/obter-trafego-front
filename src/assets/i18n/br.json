@@ -1,0 +1,22 @@
+{
+  "obter-traffic": "ObterTráfego",
+  "welcome-back": "Bem Vindo devolta",
+  "Project": "Projeto",
+  "Analytics": "Análise",
+  "password": "Senha",
+  "sign-in": {
+    "sign-in": "Entrar",
+    "create-acc-text": "Não tem uma conta?",
+    "sign-up": "Cadastre-se",
+    "email-address": "Endereço de e-mail",
+    "remember-me": "Lembrar-me",
+    "forgot-password": "Esqueceu sua senha?",
+    "welcome-message": "Bem vindo ao",
+    "welcome-text": "Contrate, crie e analise facilmente suas campanhas de acesso, pagamentos e pacotes escolhidos de maneira simples, clara e confiável.",
+    "errors": {
+      "email-required": "Email address é obrigatório",
+      "email-invalid": "Por favor, coloque um e-mail válido",
+      "password-required": "A senha é obrigatória"
+    }
+  }
+}
