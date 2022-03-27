@@ -34,7 +34,12 @@
       </fuse-alert>
 
       <!-- Sign in form -->
-      <form class="mt-8" [formGroup]="signInForm" #signInNgForm="ngForm">
+      <form
+        class="mt-8"
+        [formGroup]="signInForm"
+        #signInNgForm="ngForm"
+        (ngSubmit)="signIn()"
+      >
         <!-- Email field -->
         <mat-form-field class="w-full">
           <mat-label>{{ "sign-in.email-address" | transloco }}</mat-label>
@@ -102,7 +107,7 @@
           mat-flat-button
           [color]="'primary'"
           [disabled]="signInForm.disabled"
-          (click)="signIn()"
+          type="submit"
         >
           <span *ngIf="!signInForm.disabled">
             {{ "sign-in.sign-in" | transloco }}
