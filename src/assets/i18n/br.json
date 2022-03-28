@@ -18,5 +18,12 @@
       "email-invalid": "Por favor, coloque um e-mail válido",
       "password-required": "A senha é obrigatória"
     }
+  },
+  "sign-out": {
+    "text": "Você se desconectou!",
+    "redirecting": "Redirecionando em",
+    "redirected": "Você está sendo redirecionado agora!",
+    "go-to": "Ir para",
+    "sign-in": "Login"
   }
 }

@@ -18,5 +18,12 @@
       "email-invalid": "Please enter a valid email address",
       "password-required": "Password is required"
     }
+  },
+  "sign-out": {
+    "text": "You have signed out!",
+    "redirecting": "Redirecting in",
+    "redirected": "You are now being redirected!",
+    "go-to": "Go to",
+    "sign-in": "sign in"
   }
 }
