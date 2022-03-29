@@ -1,9 +1,18 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FuseConfigService } from '@fuse/services/config';
 import { AppConfig, Scheme, Theme, Themes } from 'app/core/config/app.config';
 import { Layout } from 'app/layout/layout.types';
+import { FuseDrawerComponent } from '@fuse/components/drawer';
+import { SettingsService } from './settings.service';
 
 @Component({
   selector: 'settings',
@@ -20,7 +29,9 @@ import { Layout } from 'app/layout/layout.types';
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class SettingsComponent implements OnInit, OnDestroy {
+export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild(FuseDrawerComponent) settingsDrawer: FuseDrawerComponent;
+
   config: AppConfig;
   layout: Layout;
   scheme: 'dark' | 'light';
@@ -30,16 +41,28 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _router: Router,
-    private _fuseConfigService: FuseConfigService
+    private _fuseConfigService: FuseConfigService,
+    private _settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
     // Subscribe to config changes
     this._fuseConfigService.config$
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((config: AppConfig) => {
-        // Store the config
-        this.config = config;
+      .subscribe((config: AppConfig) => (this.config = config));
+  }
+
+  ngAfterViewInit(): void {
+    // Subscribe to SettingsDrawerStatus changes
+    this._settingsService.opened$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((opened: boolean) => {
+        console.log('verify service: ', opened);
+        if (opened) {
+          this.settingsDrawer.open();
+        } else {
+          this.settingsDrawer.close();
+        }
       });
   }
 
@@ -70,5 +93,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   setTheme(theme: Theme): void {
     this._fuseConfigService.config = { theme };
+  }
+
+  closeSettingsDrawer(): void {
+    this._settingsService.closeSettingsDrawer();
   }
 }

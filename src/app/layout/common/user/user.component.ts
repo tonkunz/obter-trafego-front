@@ -12,6 +12,7 @@ import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject, takeUntil } from 'rxjs';
 import { User } from 'app/core/user/user.types';
 import { UserService } from 'app/core/user/user.service';
+import { SettingsService } from '../settings/settings.service';
 
 @Component({
   selector: 'user',
@@ -33,7 +34,8 @@ export class UserComponent implements OnInit, OnDestroy {
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _router: Router,
-    private _userService: UserService
+    private _userService: UserService,
+    private _settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +54,10 @@ export class UserComponent implements OnInit, OnDestroy {
     // Unsubscribe from all subscriptions
     this._unsubscribeAll.next(null);
     this._unsubscribeAll.complete();
+  }
+
+  openSettingsDrawer(): void {
+    this._settingsService.openSettingsDrawer();
   }
 
   signOut(): void {
