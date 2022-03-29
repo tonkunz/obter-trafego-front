@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  api: 'http://192.168.100.59/api/v1',
+  api: 'https://micro-google.obtersoft.com.br/api/v1',
 };
 
 /*

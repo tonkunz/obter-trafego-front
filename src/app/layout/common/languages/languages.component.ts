@@ -33,7 +33,6 @@ export class LanguagesComponent implements OnInit {
   ngOnInit(): void {
     // Get the available languages from transloco
     this.availableLangs = this._translocoService.getAvailableLangs();
-    console.log('available langs: ', this.availableLangs);
 
     // Subscribe to language changes
     this._translocoService.langChanges$.subscribe((activeLang) => {
