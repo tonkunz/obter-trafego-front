@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import {
+  FuseNavigationItem,
   FuseNavigationService,
   FuseVerticalNavigationComponent,
 } from '@fuse/components/navigation';
-import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 
 @Component({
@@ -16,7 +16,7 @@ import { NavigationService } from 'app/core/navigation/navigation.service';
 })
 export class ClassicLayoutComponent implements OnInit, OnDestroy {
   isScreenSmall: boolean;
-  navigation: Navigation;
+  navigation: FuseNavigationItem[];
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(
@@ -35,7 +35,7 @@ export class ClassicLayoutComponent implements OnInit, OnDestroy {
     // Subscribe to navigation data
     this._navigationService.navigation$
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((navigation: Navigation) => {
+      .subscribe((navigation: FuseNavigationItem[]) => {
         this.navigation = navigation;
       });
 
