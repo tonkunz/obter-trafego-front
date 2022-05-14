@@ -3,16 +3,16 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from 'app/shared/shared.module';
-import { LandingHomeComponent } from 'app/modules/landing/home/home.component';
-import { landingHomeRoutes } from 'app/modules/landing/home/home.routing';
+import { homeRoutes } from './home.routing';
+import { HomeComponent } from './home.component';
 
 @NgModule({
-  declarations: [LandingHomeComponent],
+  declarations: [HomeComponent],
   imports: [
-    RouterModule.forChild(landingHomeRoutes),
+    RouterModule.forChild(homeRoutes),
     MatButtonModule,
     MatIconModule,
     SharedModule,
   ],
 })
-export class LandingHomeModule {}
+export class HomeModule {}
