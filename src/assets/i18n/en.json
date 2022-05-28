@@ -25,7 +25,11 @@
   },
   "projects": {
     "create-project": "Create Project",
-    "search-project": "Search Project"
+    "search-project": "Search Project",
+    "loading-projects-title": "Loading Projects...",
+    "loading-projects-subtitle": "Please wait.",
+    "new-project": "New Project",
+    "modal-select-text": "Select the type of project to proceed"
   },
   "common": {
     "project": "Project",
@@ -36,6 +40,9 @@
     "begin": "Begin",
     "end": "End",
     "actions": "Actions",
-    "add": "Add"
+    "add": "Add",
+    "cancel": "Cancel",
+    "project-type": "Project Type",
+    "buy-credits": "Buy Credits"
   }
 }

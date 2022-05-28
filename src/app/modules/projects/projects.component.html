@@ -24,7 +24,7 @@
       class="ml-4"
       mat-flat-button
       [color]="'primary'"
-      routerLink="create-project"
+      (click)="handleCreateProject()"
     >
       <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
       <span class="ml-2 mr-1">{{ "common.add" | transloco }}</span>
@@ -43,8 +43,10 @@
         class="w-full h-full flex flex-col items-center justify-center p-4"
       >
         <mat-spinner class="mb-2"></mat-spinner>
-        <h2 class="text-2xl font-bold">Carregando Projetos...</h2>
-        <span>Por favor, aguarde.</span>
+        <h2 class="text-2xl font-bold">
+          {{ "projects.loading-projects-title" | transloco }}
+        </h2>
+        <span>{{ "projects.loading-projects-subtitle" | transloco }}</span>
       </div>
 
       <!-- Result Table -->

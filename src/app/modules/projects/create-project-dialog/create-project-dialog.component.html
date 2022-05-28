@@ -1,0 +1,80 @@
+<div class="p-6">
+  <div class="flex items-center">
+    <!-- Modal Title-->
+    <div
+      class="flex flex-0 items-center justify-center w-8 h-8 sm:mr-2 rounded-full text-primary-600 bg-primary-100 dark:text-primary-50 dark:bg-primary-600"
+    >
+      <mat-icon
+        class="text-primary dark:text-white"
+        [svgIcon]="'heroicons_outline:credit-card'"
+      ></mat-icon>
+    </div>
+    <h1 class="text-2xl leading-6 font-medium">
+      {{ "common.project-type" | transloco }}
+    </h1>
+  </div>
+
+  <!-- Modal Body -->
+  <div class="mt-6">
+    <!-- Loading Credits -->
+    <div
+      *ngIf="!credits?.length"
+      class="flex flex-col items-center justify-center py-4"
+    >
+      <mat-spinner class="mb-2"></mat-spinner>
+      Carregando Créditos, por favor aguarde...
+    </div>
+
+    <div *ngIf="credits?.length">
+      <p class="mb-4">{{ "projects.modal-select-text" | transloco }}</p>
+
+      <!-- Credit options list-->
+      <ul>
+        <!-- Credit item list -->
+        <li
+          *ngFor="let credit of credits"
+          class="credit-list-item"
+          [ngClass]="{
+            'credit-selectable': credit.creditos,
+            'credit-unselectable': !credit.creditos,
+            'credit-selected': credit === selectedCredit
+          }"
+          (click)="handleClickProject(credit)"
+        >
+          <span class="w-26">{{ credit.nome }}</span>
+          <span class="flex-1">{{ credit.acessos }}</span>
+          <span>{{ credit.creditos }}</span>
+        </li>
+
+        <!-- Buy more btn -->
+        <button
+          mat-flat-button
+          color="primary"
+          class="ml-auto text-sm flex items-center mt-4"
+        >
+          <mat-icon
+            class="mr-2"
+            [svgIcon]="'heroicons_outline:shopping-cart'"
+          ></mat-icon>
+          {{ "common.buy-credits" | transloco }}
+        </button>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div
+  class="flex items-center justify-center sm:justify-end px-6 py-4 space-x-3 bg-gray-50 dark:bg-black dark:bg-opacity-10"
+>
+  <button mat-stroked-button (click)="onCancel()">
+    {{ "common.cancel" | transloco }}
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!selectedCredit"
+    (click)="onCreateProject()"
+  >
+    {{ "projects.create-project" | transloco }}
+  </button>
+</div>

@@ -10,16 +10,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CreateProjectComponent } from './create-project/create-project.component';
+import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 
 @NgModule({
+  declarations: [ProjectsComponent, CreateProjectDialogComponent],
   imports: [
     RouterModule.forChild(projectsRoutes),
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-
-    // Material Imports
     MatButtonModule,
     MatIconModule,
     MatTableModule,
@@ -27,6 +26,5 @@ import { CreateProjectComponent } from './create-project/create-project.componen
     MatInputModule,
     MatProgressSpinnerModule,
   ],
-  declarations: [ProjectsComponent, CreateProjectComponent],
 })
 export class ProjectsModule {}

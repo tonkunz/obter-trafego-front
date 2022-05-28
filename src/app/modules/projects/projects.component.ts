@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 import { ProjectsService } from './projects.service';
 import { IProjectListItem, ProjectListItem } from './projects.types';
 
@@ -19,7 +22,11 @@ export class ProjectsComponent implements OnInit {
 
   searchInputControl: FormControl;
 
-  constructor(private _projectsService: ProjectsService) {
+  constructor(
+    private _projectsService: ProjectsService,
+    private _router: Router,
+    public dialog: MatDialog
+  ) {
     this.searchInputControl = new FormControl('');
   }
 
@@ -34,5 +41,21 @@ export class ProjectsComponent implements OnInit {
         );
         this.isLoading = false;
       });
+  }
+
+  handleCreateProject(): void {
+    const dialogRef = this.dialog.open(CreateProjectDialogComponent, {
+      panelClass: 'w-full',
+      maxWidth: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('result: ', result);
+      if (result) {
+        this._router.navigate(['projects/create-project'], {
+          state: { credit: result },
+        });
+      }
+    });
   }
 }

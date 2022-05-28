@@ -1,5 +1,4 @@
 import { Route } from '@angular/router';
-import { CreateProjectComponent } from './create-project/create-project.component';
 import { ProjectsComponent } from './projects.component';
 
 export const projectsRoutes: Route[] = [
@@ -9,6 +8,9 @@ export const projectsRoutes: Route[] = [
   },
   {
     path: 'create-project',
-    component: CreateProjectComponent,
+    loadChildren: () =>
+      import('./create-project/create-project.module').then(
+        (m) => m.CreateProjectModule
+      ),
   },
 ];

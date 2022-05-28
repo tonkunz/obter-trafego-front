@@ -1,0 +1,20 @@
+.credit-list-item {
+  @apply p-2 mb-2 rounded-lg font-bold flex justify-between;
+}
+
+.credit-selectable {
+  @apply border cursor-pointer;
+  transition: all .1s ease-in-out;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+}
+
+.credit-unselectable {
+  @apply bg-gray-100 text-gray-400 border border-solid border-gray-200 cursor-not-allowed;
+}
+
+.credit-selected {
+  @apply text-white bg-primary;
+}
