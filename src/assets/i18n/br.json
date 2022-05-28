@@ -1,9 +1,6 @@
 {
   "obter-traffic": "ObterTráfego",
   "welcome-back": "Bem Vindo devolta",
-  "Project": "Projeto",
-  "Analytics": "Análise",
-  "password": "Senha",
   "sign-in": {
     "sign-in": "Entrar",
     "create-acc-text": "Não tem uma conta?",
@@ -25,5 +22,20 @@
     "redirected": "Você está sendo redirecionado agora!",
     "go-to": "Ir para",
     "sign-in": "Login"
+  },
+  "projects": {
+    "create-project": "Criar Projeto",
+    "search-project": "Buscar Projeto"
+  },
+  "common": {
+    "project": "Project",
+    "projects": "Projetos",
+    "analytics": "Análise",
+    "password": "Senha",
+    "title": "Título",
+    "begin": "Início",
+    "end": "Fim",
+    "actions": "Ações",
+    "add": "Novo"
   }
 }

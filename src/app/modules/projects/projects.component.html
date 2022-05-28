@@ -1,11 +1,120 @@
-<div class="flex flex-col flex-auto min-w-0">
-  <!-- Main -->
-  <div class="flex-auto p-6 sm:p-10">
-    <!-- CONTENT GOES HERE -->
-    <div
-      class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl"
+<page-layout-1 [isLoading]="isLoading">
+  <h1 title>{{ "common.projects" | transloco }}</h1>
+
+  <!-- Header Actions -->
+  <div actions>
+    <mat-form-field
+      class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64"
     >
-      <h1>Projects Page</h1>
+      <mat-icon
+        class="icon-size-5"
+        matPrefix
+        [svgIcon]="'heroicons_solid:search'"
+      ></mat-icon>
+      <input
+        matInput
+        [formControl]="searchInputControl"
+        [autocomplete]="'off'"
+        [placeholder]="'projects.search-project' | transloco"
+      />
+    </mat-form-field>
+
+    <!-- Add product button -->
+    <button
+      class="ml-4"
+      mat-flat-button
+      [color]="'primary'"
+      routerLink="create-project"
+    >
+      <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+      <span class="ml-2 mr-1">{{ "common.add" | transloco }}</span>
+    </button>
+  </div>
+
+  <!-- Page Body -->
+  <div body class="w-full">
+    <!-- Products list -->
+    <div
+      class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
+    >
+      <!-- Fetching Data Loading -->
+      <div
+        *ngIf="isLoading"
+        class="w-full h-full flex flex-col items-center justify-center p-4"
+      >
+        <mat-spinner class="mb-2"></mat-spinner>
+        <h2 class="text-2xl font-bold">Carregando Projetos...</h2>
+        <span>Por favor, aguarde.</span>
+      </div>
+
+      <!-- Result Table -->
+      <table
+        mat-table
+        [dataSource]="projects"
+        class="w-full p-4"
+        *ngIf="!isLoading"
+      >
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef="">
+            {{ "common.title" | transloco }}
+          </th>
+          <td mat-cell *matCellDef="let project">{{ project.titulo }}</td>
+        </ng-container>
+
+        <!-- Inicio Column -->
+        <ng-container matColumnDef="inicio">
+          <th mat-header-cell *matHeaderCellDef="">
+            {{ "common.begin" | transloco }}
+          </th>
+          <td mat-cell *matCellDef="let project">{{ project.inicio }}</td>
+        </ng-container>
+
+        <!-- Fim Column -->
+        <ng-container matColumnDef="fim">
+          <th mat-header-cell *matHeaderCellDef="">
+            {{ "common.end" | transloco }}
+          </th>
+          <td mat-cell *matCellDef="let project">{{ project.fim }}</td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef="">Status</th>
+          <td mat-cell *matCellDef="let project">
+            <mat-icon
+              *ngIf="project.status === 'ativo'"
+              [svgIcon]="'heroicons_outline:check'"
+              class="text-green-500"
+            ></mat-icon>
+
+            <mat-icon
+              *ngIf="project.status === 'inativo'"
+              [svgIcon]="'heroicons_outline:x'"
+              class="text-red-500"
+            ></mat-icon>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef="">
+            {{ "common.actions" | transloco }}
+          </th>
+          <td mat-cell *matCellDef="let project">
+            <button mat-icon-button>
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="tableColumns"
+          class="bg-default"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+      </table>
     </div>
   </div>
-</div>
+</page-layout-1>
