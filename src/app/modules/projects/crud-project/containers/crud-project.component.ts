@@ -8,16 +8,17 @@ import {
 import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
+import { Project, ProjectsService } from 'app/core/services';
 import { ICreditItem } from 'app/core/services/credits/credits.types';
 import { Subject, takeUntil } from 'rxjs';
-import { IFirstStepForm } from './first-step-form/first-step-form.types';
-import { panelOptions } from './panel-data';
+import { IFirstStepForm } from '../components/first-step-form/first-step-form.types';
+import { panelOptions } from '../panel-data';
 
 @Component({
-  selector: 'create-project',
-  templateUrl: 'create-project.component.html',
+  selector: 'crud-project',
+  templateUrl: 'crud-project.component.html',
 })
-export class CreateProjectComponent implements OnInit, OnDestroy {
+export class CrudProjectComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') drawer: MatDrawer;
 
   drawerMode: 'over' | 'side' = 'side';
@@ -27,14 +28,15 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
 
   projectType: ICreditItem | null;
 
-  projectCompleteForm = {};
+  projectCompleteForm: Project = new Project();
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _fuseMediaWatcherService: FuseMediaWatcherService,
-    private _router: Router
+    private _router: Router,
+    private _projectsService: ProjectsService
   ) {
     this.projectType =
       this._router.getCurrentNavigation()?.extras?.state?.credit;
@@ -86,26 +88,22 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       ...this.projectCompleteForm,
       ...formValue,
     };
+
+    if (this.projectCompleteForm?.id) {
+      this._projectsService
+        .putProject(this.projectCompleteForm)
+        .subscribe((res) => this.setProjectDataFromApi(res));
+        return;
+    }
+
+    this._projectsService
+      .postProject(formValue)
+      .subscribe((res) => this.setProjectDataFromApi(res));
   }
 
-  handleSecStepForm(formValue): void {
+  setProjectDataFromApi(data: any): void {
     this.projectCompleteForm = {
-      ...this.projectCompleteForm,
-      ...formValue,
-    };
-  }
-
-  handleThirdStepForm(formValue): void {
-    this.projectCompleteForm = {
-      ...this.projectCompleteForm,
-      ...formValue,
-    };
-  }
-
-  handleFourtyStepForm(formValue): void {
-    this.projectCompleteForm = {
-      ...this.projectCompleteForm,
-      ...formValue,
+      ...Project.fromJson(data),
     };
   }
 }

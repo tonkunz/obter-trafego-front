@@ -57,6 +57,36 @@ export class Project implements IProject {
   links: Link[];
   localizacoes: Localizaco[];
 
+  constructor() {
+    this.id = null;
+    this.titulo = '';
+    this.siteUrl = '';
+    this.renovacaoAutomatica = false;
+    this.taxaRejeicao = '';
+    this.taxaRetorno = '';
+    this.tempoPagina = '';
+    this.feedUrl = '';
+    this.googleCodigo = '';
+    this.taxaDireto = '';
+    this.taxaReferencia = '';
+    this.taxaOrganica = '';
+    this.taxaDesktop = '';
+    this.taxaMobile = '';
+    this.inicio = '';
+    this.fim = '';
+    this.status = '';
+    this.createdAt = '';
+    this.updatedAt = '';
+    this.deletedAt = '';
+    this.projetoTipoId = 0;
+    this.createdById = 0;
+    this.projetoTipo = [];
+    this.referencias = [];
+    this.palavras = [];
+    this.links = [];
+    this.localizacoes = [];
+  }
+
   static toJson(data: IProject): any {
     /* eslint-disable */
     return {
@@ -154,31 +184,35 @@ export interface Localizaco {
 //
 // NewProject Types
 export interface INewProject {
-  titulo: string;
-  googleCodigo: string;
+  title: string;
+  googleCode: string;
   siteUrl: string;
+  projectTypeId: number;
 }
 
 export class NewProject implements INewProject {
-  titulo: string;
-  googleCodigo: string;
+  title: string;
+  googleCode: string;
   siteUrl: string;
+  projectTypeId: number;
 
   static toJson(data: INewProject): object {
     /* eslint-disable */
     return {
-      titulo: data.titulo,
-      google_codigo: data.googleCodigo,
+      titulo: data.title,
+      google_codigo: data.googleCode,
       site_url: data.siteUrl,
+      projeto_tipo_id: data.projectTypeId,
     };
     /* eslint-enable */
   }
 
   static fromJson(data: any): INewProject {
     return {
-      titulo: data.titulo,
-      googleCodigo: data.google_codigo,
+      title: data.titulo,
+      googleCode: data.google_codigo,
       siteUrl: data.site_url,
+      projectTypeId: data.projeto_tipo_id,
     };
   }
 }

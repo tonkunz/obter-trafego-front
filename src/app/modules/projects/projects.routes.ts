@@ -9,8 +9,8 @@ export const projectsRoutes: Route[] = [
   {
     path: 'create-project',
     loadChildren: () =>
-      import('./create-project/create-project.module').then(
-        (m) => m.CreateProjectModule
+      import('./crud-project/crud-project.module').then(
+        (m) => m.CrudProjectModule
       ),
   },
 ];
