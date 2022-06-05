@@ -29,7 +29,18 @@
     "loading-projects-title": "Loading Projects...",
     "loading-projects-subtitle": "Please wait.",
     "new-project": "New Project",
-    "modal-select-text": "Select the type of project to proceed"
+    "modal-select-text": "Select the type of project to proceed",
+    "loading-credits": "Loading credits, please wait...",
+    "general-info-title": "General Information",
+    "form": {
+      "subtitle": "Fill carefully with the first project informations",
+      "title": "Title",
+      "google-code": "Google Code",
+      "site-url": "Website URL",
+      "errors": {
+        "google-code-invalid": "Please insert a valid Google Analytics Code"
+      }
+    }
   },
   "common": {
     "project": "Project",
@@ -42,6 +53,7 @@
     "actions": "Actions",
     "add": "Add",
     "cancel": "Cancel",
+    "save": "Save",
     "project-type": "Project Type",
     "buy-credits": "Buy Credits"
   }

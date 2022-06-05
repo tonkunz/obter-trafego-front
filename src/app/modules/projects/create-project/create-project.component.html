@@ -54,7 +54,7 @@
                     selectedPanel && selectedPanel === panel.id
                 }"
               >
-                {{ panel.title }}
+                {{ panel.title | transloco }}
               </div>
               <div class="mt-0.5 text-secondary">
                 {{ panel.description }}
@@ -63,6 +63,10 @@
           </div>
         </ng-container>
       </div>
+
+      <pre>
+        {{ projectCompleteForm | json }}
+      </pre>
     </mat-drawer>
 
     <!-- Drawer content -->
@@ -84,7 +88,7 @@
           <div
             class="ml-2 lg:ml-0 text-3xl font-bold tracking-tight leading-none"
           >
-            {{ getPanelInfo(selectedPanel).title }}
+            {{ getPanelInfo(selectedPanel).title | transloco }}
           </div>
         </div>
 
@@ -92,8 +96,12 @@
         <div class="mt-8">
           <ng-container [ngSwitch]="selectedPanel">
             <!-- Account -->
-            <ng-container *ngSwitchCase="'account'">
-              <h1>Painel 1</h1>
+            <ng-container *ngSwitchCase="'first-step'">
+              <first-step-form
+                [projectTypeId]="projectType?.id"
+                [projectType]="projectType"
+                (saveNewProject)="handleFirstStepForm($event)"
+              ></first-step-form>
             </ng-container>
             <!-- Security -->
             <ng-container *ngSwitchCase="'security'">

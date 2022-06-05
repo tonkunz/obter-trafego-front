@@ -50,5 +50,11 @@ export class IconsModule {
         'assets/icons/heroicons-solid.svg'
       )
     );
+    this._matIconRegistry.addSvgIcon(
+      'google_brand',
+      this._domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/icons/google-brand.svg'
+      )
+    );
   }
 }

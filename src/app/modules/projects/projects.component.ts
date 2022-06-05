@@ -3,8 +3,11 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
-import { ProjectsService } from './projects.service';
-import { IProjectListItem, ProjectListItem } from './projects.types';
+import {
+  ProjectsService,
+  IProjectListItem,
+  ProjectListItem,
+} from '../../core/services';
 
 @Component({
   selector: 'projects',
@@ -50,7 +53,6 @@ export class ProjectsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('result: ', result);
       if (result) {
         this._router.navigate(['projects/create-project'], {
           state: { credit: result },

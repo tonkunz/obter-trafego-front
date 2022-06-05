@@ -10,9 +10,7 @@ export class CreditsService {
   private _clientCredits = new BehaviorSubject<ICreditItem[]>(undefined);
 
   constructor(private _http: HttpClient) {
-    console.log('construtor credits service...');
     if (!this._creditsList.length) {
-      console.log('iniciando fetch de creditos');
       this.getCreditReport().subscribe((res: ICreditItem[]) =>
         this.setClientCredits(res)
       );
@@ -23,7 +21,7 @@ export class CreditsService {
     return this._clientCredits.asObservable();
   }
 
-  setClientCredits(newValues: ICreditItem[]) {
+  setClientCredits(newValues: ICreditItem[]): void {
     this._creditsList = newValues;
     this._clientCredits.next(newValues);
   }

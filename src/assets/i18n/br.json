@@ -29,10 +29,21 @@
     "loading-projects-title": "Carregando Projetos...",
     "loading-projects-subtitle": "Por favor, aguarde.",
     "new-project": "Novo Projeto",
-    "modal-select-text": "Selecione o tipo de projeto para prosseguir"
+    "modal-select-text": "Selecione o tipo de projeto para prosseguir",
+    "loading-credits": "Carregando Créditos, por favor aguarde...",
+    "general-info-title": "Informações Gerais",
+    "form": {
+      "subtitle": "Preencha cuidadosamente com as primeiras informações do projeto",
+      "title": "Título",
+      "google-code": "Código Google",
+      "site-url": "URL do Site",
+      "errors": {
+        "google-code-invalid": "Por favor, insira um código do Google Analytics válido"
+      }
+    }
   },
   "common": {
-    "project": "Project",
+    "project": "Projeto",
     "projects": "Projetos",
     "analytics": "Análise",
     "password": "Senha",
@@ -42,6 +53,7 @@
     "actions": "Ações",
     "add": "Novo",
     "cancel": "Cancelar",
+    "save": "Salvar",
     "project-type": "Tipo do projeto",
     "buy-credits": "Comprar Créditos"
   }

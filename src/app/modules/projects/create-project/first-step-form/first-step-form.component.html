@@ -1,0 +1,84 @@
+<div class="w-full max-w-3xl">
+  <!-- Form -->
+  <form [formGroup]="firstStepForm" (ngSubmit)="handleSaveNewProject()">
+    <!-- Section -->
+    <div class="w-full">
+      <div class="text-xl">
+        {{ ("projects.new-project" | transloco) + ' ' + projectType?.nome }}
+      </div>
+      <div class="text-secondary">
+        {{ "projects.form.subtitle" | transloco }}
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+      <!-- Title -->
+      <div class="sm:col-span-4">
+        <mat-form-field class="fuse-mat-no-subscript w-full">
+          <mat-label>
+            {{ "projects.form.title" | transloco }}
+          </mat-label>
+          <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'heroicons_solid:document-text'"
+            matPrefix
+          ></mat-icon>
+          <input formControlName="title" matInput />
+        </mat-form-field>
+      </div>
+
+      <!-- Google Code -->
+      <div class="sm:col-span-4">
+        <mat-form-field class="fuse-mat-no-subscript w-full">
+          <mat-label>
+            {{ "projects.form.google-code" | transloco }}
+          </mat-label>
+          <mat-icon
+            class="icon-size-5"
+            svgIcon="google_brand"
+            matPrefix
+          ></mat-icon>
+          <input formControlName="googleCode" matInput />
+
+          <!-- Error on Validate GoogleCode -->
+          <mat-error
+            *ngIf="
+              firstStepForm.controls.googleCode.hasError('invalidGoogleCode') &&
+              !firstStepForm.controls.googleCode.hasError('required')
+            "
+          >
+            {{ 'projects.form.errors.google-code-invalid' | transloco }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Site url -->
+      <div class="sm:col-span-4">
+        <mat-form-field class="fuse-mat-no-subscript w-full">
+          <mat-label>
+            {{ "projects.form.site-url" | transloco }}
+          </mat-label>
+          <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'heroicons_solid:globe'"
+            matPrefix
+          ></mat-icon>
+          <input formControlName="siteUrl" matInput />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="mt-11 mb-10 border-t"></div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-end">
+      <button mat-stroked-button type="button" routerLink="../">
+        {{ "common.cancel" | transloco }}
+      </button>
+      <button class="ml-4" mat-flat-button type="submit" color="primary">
+        {{ "common.save" | transloco }}
+      </button>
+    </div>
+  </form>
+</div>

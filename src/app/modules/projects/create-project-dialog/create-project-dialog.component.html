@@ -22,7 +22,7 @@
       class="flex flex-col items-center justify-center py-4"
     >
       <mat-spinner class="mb-2"></mat-spinner>
-      Carregando Créditos, por favor aguarde...
+      <p>{{ "projects.loading-credits" | transloco }}</p>
     </div>
 
     <div *ngIf="credits?.length">

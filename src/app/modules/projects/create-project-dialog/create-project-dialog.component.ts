@@ -1,7 +1,6 @@
 import { Component, Inject, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CreditsService } from 'app/core/services/credits/credits.service';
-import { ICreditItem } from 'app/core/services/credits/credits.types';
+import { CreditsService, ICreditItem } from 'app/core/services';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
