@@ -1,22 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
-import {
-  ProjectsService,
-  IProjectListItem,
-  ProjectListItem,
-} from '../../core/services';
+import { IProjectListItem } from '../../core/services';
+import { ProjectsFacade } from './projects.facade';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'projects',
   templateUrl: 'projects.component.html',
 })
-export class ProjectsComponent implements OnInit {
-  // @ViewChild(MatPaginator) private _paginator: MatPaginator;
-  // @ViewChild(MatSort) private _sort: MatSort;
-
+export class ProjectsComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
 
   projects: IProjectListItem[] = [];
@@ -25,25 +20,31 @@ export class ProjectsComponent implements OnInit {
 
   searchInputControl: FormControl;
 
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
+
   constructor(
-    private _projectsService: ProjectsService,
     private _router: Router,
-    public dialog: MatDialog
+    private _facade: ProjectsFacade,
+    public dialog: MatDialog,
   ) {
     this.searchInputControl = new FormControl('');
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
+    this._facade.isLoading$.subscribe((value) => {
+      this.isLoading = value;
+    });
 
-    this._projectsService
-      .getProjects()
-      .subscribe((projects: IProjectListItem[]) => {
-        this.projects = projects.map((project) =>
-          ProjectListItem.fromJson(project)
-        );
-        this.isLoading = false;
-      });
+    this._facade.projectsList$.subscribe((value) => {
+      this.projects = value;
+    });
+
+    this._facade.loadProjectsList();
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
   }
 
   handleCreateProject(): void {
@@ -59,5 +60,9 @@ export class ProjectsComponent implements OnInit {
         });
       }
     });
+  }
+
+  handleEditProject(project: IProjectListItem): void {
+    this._router.navigate(['projects/edit-project/' + project.id]);
   }
 }

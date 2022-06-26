@@ -13,4 +13,11 @@ export const projectsRoutes: Route[] = [
         (m) => m.CrudProjectModule
       ),
   },
+  {
+    path: 'edit-project/:id',
+    loadChildren: () =>
+      import('./crud-project/crud-project.module').then(
+        (m) => m.CrudProjectModule
+      ),
+  }
 ];

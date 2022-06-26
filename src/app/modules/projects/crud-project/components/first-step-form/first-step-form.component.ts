@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICreditItem } from 'app/core/services/credits/credits.types';
 import { isGoogleCode } from 'app/shared/validators/google-code.validator';
 import { IFirstStepForm } from './first-step-form.types';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'first-step-form',
@@ -16,11 +17,18 @@ export class FirstStepFormComponent implements OnInit {
     nome: 'Undefined',
   };
 
+  @Input() projectId: number = 0;
+
+  @Input() projectData;
+
   @Output() saveNewProject: EventEmitter<IFirstStepForm> = new EventEmitter();
 
   firstStepForm: FormGroup;
 
-  constructor(private _fb: FormBuilder) {}
+  constructor(
+    private _fb: FormBuilder,
+    private _location: Location
+  ) {}
 
   ngOnInit(): void {
     this.firstStepForm = this._fb.group({
@@ -29,6 +37,8 @@ export class FirstStepFormComponent implements OnInit {
       googleCode: ['', [Validators.required, isGoogleCode()]],
       siteUrl: ['', Validators.required],
     });
+
+    console.log('project Data: ', this.projectData);
   }
 
   handleSaveNewProject(): void {
@@ -37,5 +47,9 @@ export class FirstStepFormComponent implements OnInit {
     }
 
     this.saveNewProject.emit(this.firstStepForm.value);
+  }
+
+  handleBack(): void {
+    this._location.back();
   }
 }

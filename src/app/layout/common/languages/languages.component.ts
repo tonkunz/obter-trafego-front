@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { take } from 'rxjs';
+import { take, tap } from 'rxjs';
 import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
 import {
   FuseNavigationService,
@@ -82,39 +82,22 @@ export class LanguagesComponent implements OnInit {
     const navigation = navComponent.navigation;
 
     // Get the Project dashboard item and update its title
-    const projectDashboardItem = this._fuseNavigationService.getItem(
-      'dashboards.project',
-      navigation
-    );
-    if (projectDashboardItem) {
-      this._translocoService
-        .selectTranslate('Project')
-        .pipe(take(1))
-        .subscribe((translation) => {
-          // Set the title
-          projectDashboardItem.title = translation;
-
-          // Refresh the navigation component
-          navComponent.refresh();
-        });
-    }
-
-    // Get the Analytics dashboard item and update its title
-    const analyticsDashboardItem = this._fuseNavigationService.getItem(
-      'dashboards.analytics',
-      navigation
-    );
-    if (analyticsDashboardItem) {
-      this._translocoService
-        .selectTranslate('Analytics')
-        .pipe(take(1))
-        .subscribe((translation) => {
-          // Set the title
-          analyticsDashboardItem.title = translation;
-
-          // Refresh the navigation component
-          navComponent.refresh();
-        });
-    }
+    [{ key: 'projects', value: 'common.projects' }]
+      .map((x) => ({
+        ...x,
+        item: this._fuseNavigationService.getItem(x.key, navigation),
+      }))
+      .filter((x) => x.item)
+      .map((x) =>
+        this._translocoService
+          .selectTranslate(x.value)
+          .pipe(
+            take(1),
+            tap((t) => {
+              x.item.title = t;
+            })
+          )
+          .subscribe(() => navComponent.refresh())
+      );
   }
 }

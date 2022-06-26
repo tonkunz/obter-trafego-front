@@ -73,7 +73,7 @@
 
     <!-- Actions -->
     <div class="flex items-center justify-end">
-      <button mat-stroked-button type="button" routerLink="../">
+      <button mat-stroked-button type="button" (click)="handleBack()">
         {{ "common.cancel" | transloco }}
       </button>
       <button class="ml-4" mat-flat-button type="submit" color="primary">

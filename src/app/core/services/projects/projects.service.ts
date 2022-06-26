@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { sanitizePutProject } from './projects.helpers';
 import {
   INewProject,
@@ -10,13 +10,20 @@ import {
   NewProject,
   Project,
 } from './projects.types';
-
 @Injectable({ providedIn: 'root' })
 export class ProjectsService {
   constructor(private _http: HttpClient) {}
 
   getProjects(): Observable<IProjectListItem[]> {
     return this._http.get<IProjectListItem[]>(`${environment.api}/projetos`);
+  }
+
+  getProjectById(id: number): Observable<IProject> {
+    const params = new HttpParams().set('id', id);
+
+    return this._http
+      .get<IProject>(`${environment.api}/projeto`, { params })
+      .pipe(tap((value: any) => Project.fromJson(value)));
   }
 
   postProject(newProject: INewProject): any {

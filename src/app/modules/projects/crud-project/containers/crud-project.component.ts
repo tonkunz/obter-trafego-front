@@ -6,13 +6,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import { Project, ProjectsService } from 'app/core/services';
 import { ICreditItem } from 'app/core/services/credits/credits.types';
 import { Subject, takeUntil } from 'rxjs';
+import { ProjectsFacade } from '../../projects.facade';
 import { IFirstStepForm } from '../components/first-step-form/first-step-form.types';
-import { panelOptions } from '../panel-data';
+import { panelOptions } from './panel-data';
 
 @Component({
   selector: 'crud-project',
@@ -20,6 +21,8 @@ import { panelOptions } from '../panel-data';
 })
 export class CrudProjectComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') drawer: MatDrawer;
+
+  isLoading: boolean;
 
   drawerMode: 'over' | 'side' = 'side';
   drawerOpened: boolean = true;
@@ -36,13 +39,37 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _fuseMediaWatcherService: FuseMediaWatcherService,
     private _router: Router,
-    private _projectsService: ProjectsService
+    private _projectsService: ProjectsService,
+    private _activatedRoute: ActivatedRoute,
+    private _projectsFacade: ProjectsFacade
   ) {
-    this.projectType =
-      this._router.getCurrentNavigation()?.extras?.state?.credit;
+    this.projectType = this._router.getCurrentNavigation()?.extras?.state?.credit;
+
+    if (this._activatedRoute.snapshot.params['id']) {
+      this._projectsFacade.setCurrentProject(this._activatedRoute.snapshot.params['id']);
+    }
   }
 
   ngOnInit(): void {
+    this._projectsFacade.currentProject$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((data) => {
+        if (data) {
+          this.projectCompleteForm = data;
+
+          this.projectType = {
+            id: data.projetoTipoId,
+            acessos: data.projetoTipo[0].acessos,
+            nome: data.projetoTipo[0].nome,
+            creditos: 0,
+          };
+        }
+      });
+
+    this._projectsFacade.isLoading$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((val) => this.isLoading = val);
+
     // Subscribe to media changes
     this._fuseMediaWatcherService.onMediaChange$
       .pipe(takeUntil(this._unsubscribeAll))
@@ -75,7 +102,7 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
   }
 
   getPanelInfo(id: string): any {
-    return this.panels.find((panel) => panel.id === id);
+    return this.panels.find((panel: any) => panel.id === id);
   }
 
   trackByFn(index: number, item: any): any {
@@ -92,13 +119,13 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
     if (this.projectCompleteForm?.id) {
       this._projectsService
         .putProject(this.projectCompleteForm)
-        .subscribe((res) => this.setProjectDataFromApi(res));
-        return;
+        .subscribe((res: any) => this.setProjectDataFromApi(res));
+      return;
     }
 
     this._projectsService
       .postProject(formValue)
-      .subscribe((res) => this.setProjectDataFromApi(res));
+      .subscribe((res: any) => this.setProjectDataFromApi(res));
   }
 
   setProjectDataFromApi(data: any): void {

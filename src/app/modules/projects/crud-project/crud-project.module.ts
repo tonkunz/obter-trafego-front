@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CrudProjectComponent } from './containers/crud-project.component';
 import { FirstStepFormComponent } from './components/first-step-form/first-step-form.component';
+import { ProjectState } from './state/project.state';
+import { ProjectsFacade } from '../projects.facade';
 
 const routes: Route[] = [
   {
@@ -27,5 +29,9 @@ const routes: Route[] = [
     MatInputModule,
     MatButtonModule,
   ],
+  providers: [
+    ProjectState,
+    ProjectsFacade,
+  ]
 })
 export class CrudProjectModule {}

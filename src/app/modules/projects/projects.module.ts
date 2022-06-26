@@ -13,7 +13,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CreateProjectDialogComponent } from './create-project-dialog/create-project-dialog.component';
 
 @NgModule({
-  declarations: [ProjectsComponent, CreateProjectDialogComponent],
+  declarations: [
+    ProjectsComponent,
+    CreateProjectDialogComponent,
+  ],
   imports: [
     RouterModule.forChild(projectsRoutes),
     SharedModule,
