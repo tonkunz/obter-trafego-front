@@ -28,6 +28,7 @@
     "search-project": "Search Project",
     "loading-projects-title": "Loading Projects...",
     "loading-projects-subtitle": "Please wait.",
+    "loading-current-project-title": "Loading data of project...",
     "new-project": "New Project",
     "modal-select-text": "Select the type of project to proceed",
     "loading-credits": "Loading credits, please wait...",
@@ -40,6 +41,9 @@
       "errors": {
         "google-code-invalid": "Please insert a valid Google Analytics Code"
       }
+    },
+    "second-step": {
+      "title": "Basic Settings"
     }
   },
   "common": {

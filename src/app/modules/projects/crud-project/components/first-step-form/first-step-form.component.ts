@@ -1,15 +1,24 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICreditItem } from 'app/core/services/credits/credits.types';
 import { isGoogleCode } from 'app/shared/validators/google-code.validator';
 import { IFirstStepForm } from './first-step-form.types';
 import { Location } from '@angular/common';
+import { ProjectsFacade } from 'app/modules/projects/projects.facade';
 
 @Component({
   selector: 'first-step-form',
   templateUrl: 'first-step-form.component.html',
 })
-export class FirstStepFormComponent implements OnInit {
+export class FirstStepFormComponent implements OnInit, OnChanges {
   @Input() projectType: ICreditItem = {
     id: 0,
     acessos: 0,
@@ -21,32 +30,48 @@ export class FirstStepFormComponent implements OnInit {
 
   @Input() projectData;
 
-  @Output() saveNewProject: EventEmitter<IFirstStepForm> = new EventEmitter();
+  @Output() saveProject: EventEmitter<IFirstStepForm> = new EventEmitter();
 
   firstStepForm: FormGroup;
 
+  isLoadingProject: boolean = false;
+
   constructor(
     private _fb: FormBuilder,
-    private _location: Location
+    private _location: Location,
+    private _projectFacade: ProjectsFacade,
   ) {}
 
   ngOnInit(): void {
-    this.firstStepForm = this._fb.group({
-      title: ['', Validators.required],
-      projectTypeId: [this.projectType?.id || 0, Validators.required],
-      googleCode: ['', [Validators.required, isGoogleCode()]],
-      siteUrl: ['', Validators.required],
-    });
+    this.createForm(this.projectData || null);
 
-    console.log('project Data: ', this.projectData);
+    this._projectFacade.isLoadingProject$.subscribe((val: boolean) => this.isLoadingProject = val);
   }
 
-  handleSaveNewProject(): void {
-    if (this.firstStepForm.invalid) {
-      return;
-    }
+  ngOnChanges(changes: SimpleChanges): void {
+    const { projectData } = changes;
 
-    this.saveNewProject.emit(this.firstStepForm.value);
+    if (projectData.currentValue !== projectData.previousValue) {
+      this.createForm(this.projectData || null);
+    }
+  }
+
+  createForm(data?: any): void {
+    this.firstStepForm = this._fb.group({
+      titulo: [data?.titulo || '', Validators.required],
+      projectTypeId: [this.projectType?.id || 0, Validators.required],
+      googleCodigo: [
+        data?.googleCodigo || '',
+        [Validators.required, isGoogleCode()],
+      ],
+      siteUrl: [data?.siteUrl || '', Validators.required],
+    });
+  }
+
+  handleSaveProject(): void {
+    if (this.firstStepForm.invalid) return;
+
+    this.saveProject.emit(this.firstStepForm.value);
   }
 
   handleBack(): void {

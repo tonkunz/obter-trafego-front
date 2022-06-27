@@ -66,7 +66,7 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
         }
       });
 
-    this._projectsFacade.isLoading$
+    this._projectsFacade.isLoadingList$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((val) => this.isLoading = val);
 
@@ -117,20 +117,10 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
     };
 
     if (this.projectCompleteForm?.id) {
-      this._projectsService
-        .putProject(this.projectCompleteForm)
-        .subscribe((res: any) => this.setProjectDataFromApi(res));
+      this._projectsFacade.updateCurrentProject(this.projectCompleteForm);
       return;
     }
 
-    this._projectsService
-      .postProject(formValue)
-      .subscribe((res: any) => this.setProjectDataFromApi(res));
-  }
-
-  setProjectDataFromApi(data: any): void {
-    this.projectCompleteForm = {
-      ...Project.fromJson(data),
-    };
+    this._projectsFacade.createNewProject(formValue);
   }
 }

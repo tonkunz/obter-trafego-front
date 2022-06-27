@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable, tap } from 'rxjs';
-import { sanitizePutProject } from './projects.helpers';
 import {
   INewProject,
   IProject,
@@ -35,7 +34,7 @@ export class ProjectsService {
   putProject(project: IProject): any {
     const projectToApi = {
       ...Project.toJson(project),
-      ...sanitizePutProject(project),
+      referencias: [],
     };
 
     const params = new HttpParams().set('id', projectToApi.id);

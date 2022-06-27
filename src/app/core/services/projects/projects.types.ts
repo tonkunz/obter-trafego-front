@@ -93,17 +93,17 @@ export class Project implements IProject {
       id: data.id || null,
       titulo: data.titulo,
       site_url: data.siteUrl,
-      renovacao_automatica: data.renovacaoAutomatica,
-      taxa_rejeicao: data.taxaRejeicao,
-      taxa_retorno: data.taxaRetorno,
-      tempo_pagina: data.tempoPagina,
-      feed_url: data.feedUrl,
+      renovacao_automatica: data.renovacaoAutomatica || false,
+      taxa_rejeicao: data.taxaRejeicao || '0',
+      taxa_retorno: data.taxaRetorno || '0',
+      tempo_pagina: data.tempoPagina || '0',
+      feed_url: data.feedUrl || '',
       google_codigo: data.googleCodigo,
-      taxa_direto: data.taxaDireto,
-      taxa_referencia: data.taxaReferencia,
-      taxa_organica: data.taxaOrganica,
-      taxa_desktop: data.taxaDesktop,
-      taxa_mobile: data.taxaMobile,
+      taxa_direto: data.taxaDireto || '0',
+      taxa_referencia: data.taxaReferencia || '0',
+      taxa_organica: data.taxaOrganica || '0',
+      taxa_desktop: data.taxaDesktop || '0',
+      taxa_mobile: data.taxaMobile || '0',
       inicio: data.inicio,
       fim: data.fim,
       status: data.status,
@@ -113,10 +113,10 @@ export class Project implements IProject {
       projeto_tipo_id: data.projetoTipoId,
       created_by_id: data.createdById,
       projetoTipo: data.projetoTipo,
-      referencias: data.referencias,
-      palavras: data.palavras,
-      links: data.links,
-      localizacoes: data.localizacoes,
+      referencias: data.referencias || [],
+      palavras: data.palavras || [],
+      links: data.links || [],
+      localizacoes: data.localizacoes || [],
     };
     /* eslint-enable */
   }
@@ -184,23 +184,23 @@ export interface Localizaco {
 //
 // NewProject Types
 export interface INewProject {
-  title: string;
-  googleCode: string;
+  titulo: string;
+  googleCodigo: string;
   siteUrl: string;
   projectTypeId: number;
 }
 
 export class NewProject implements INewProject {
-  title: string;
-  googleCode: string;
+  titulo: string;
+  googleCodigo: string;
   siteUrl: string;
   projectTypeId: number;
 
   static toJson(data: INewProject): object {
     /* eslint-disable */
     return {
-      titulo: data.title,
-      google_codigo: data.googleCode,
+      titulo: data.titulo,
+      google_codigo: data.googleCodigo,
       site_url: data.siteUrl,
       projeto_tipo_id: data.projectTypeId,
     };
@@ -209,8 +209,8 @@ export class NewProject implements INewProject {
 
   static fromJson(data: any): INewProject {
     return {
-      title: data.titulo,
-      googleCode: data.google_codigo,
+      titulo: data.titulo,
+      googleCodigo: data.google_codigo,
       siteUrl: data.site_url,
       projectTypeId: data.projeto_tipo_id,
     };

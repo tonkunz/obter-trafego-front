@@ -57,7 +57,6 @@ export class SettingsComponent implements OnInit, AfterViewInit, OnDestroy {
     this._settingsService.opened$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((opened: boolean) => {
-        console.log('verify service: ', opened);
         if (opened) {
           this.settingsDrawer.open();
         } else {

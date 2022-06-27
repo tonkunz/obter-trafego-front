@@ -28,6 +28,7 @@
     "search-project": "Buscar Projeto",
     "loading-projects-title": "Carregando Projetos...",
     "loading-projects-subtitle": "Por favor, aguarde.",
+    "loading-current-project-title": "Carregando os dados do projeto...",
     "new-project": "Novo Projeto",
     "modal-select-text": "Selecione o tipo de projeto para prosseguir",
     "loading-credits": "Carregando Créditos, por favor aguarde...",
@@ -40,6 +41,9 @@
       "errors": {
         "google-code-invalid": "Por favor, insira um código do Google Analytics válido"
       }
+    },
+    "second-step": {
+      "title": "Configurações Básicas"
     }
   },
   "common": {

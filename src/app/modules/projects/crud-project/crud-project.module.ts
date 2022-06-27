@@ -10,6 +10,7 @@ import { CrudProjectComponent } from './containers/crud-project.component';
 import { FirstStepFormComponent } from './components/first-step-form/first-step-form.component';
 import { ProjectState } from './state/project.state';
 import { ProjectsFacade } from '../projects.facade';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Route[] = [
   {
@@ -28,6 +29,7 @@ const routes: Route[] = [
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     ProjectState,

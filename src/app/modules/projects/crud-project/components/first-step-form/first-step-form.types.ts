@@ -1,6 +1,6 @@
 export interface IFirstStepForm {
-  title: string;
+  titulo: string;
   projectTypeId: number;
-  googleCode: string;
+  googleCodigo: string;
   siteUrl: string;
 }

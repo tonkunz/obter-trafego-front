@@ -8,12 +8,16 @@ export class ProjectState {
 
   private _currentProject$: BehaviorSubject<IProject>;
 
+  private _isLoadingList$: BehaviorSubject<boolean>;
+
   private _isLoadingProject$: BehaviorSubject<boolean>;
 
   constructor() {
     this._projectsList$ = new BehaviorSubject<IProjectListItem[]>([]);
 
     this._currentProject$ = new BehaviorSubject<IProject>(null);
+
+    this._isLoadingList$ = new BehaviorSubject<boolean>(false);
 
     this._isLoadingProject$ = new BehaviorSubject<boolean>(false);
   }
@@ -44,9 +48,20 @@ export class ProjectState {
     return this._currentProject$.value;
   }
 
-
-
   // Loading Handlers
+  set isLoadingList(val: boolean) {
+    this._isLoadingList$.next(val);
+  }
+
+  get isLoadingList$(): Observable<boolean> {
+    return this._isLoadingList$.asObservable();
+  }
+
+  get isLoadingList(): boolean {
+    return this._isLoadingList$.value;
+  }
+
+  // Loading Updates
   set isLoadingProject(val: boolean) {
     this._isLoadingProject$.next(val);
   }

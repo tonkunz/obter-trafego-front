@@ -5,9 +5,13 @@ import { TranslocoModule } from '@ngneat/transloco';
 
 // Components
 import { PageLayout1Component } from './components/page-layouts/page-layout-1.component';
+import { CustomSpinnerComponent } from './components/custom-spinner/custom-spinner.component';
 
 @NgModule({
-  declarations: [PageLayout1Component],
+  declarations: [
+    PageLayout1Component,
+    CustomSpinnerComponent,
+  ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
     CommonModule,
@@ -17,6 +21,7 @@ import { PageLayout1Component } from './components/page-layouts/page-layout-1.co
 
     // Components
     PageLayout1Component,
+    CustomSpinnerComponent,
   ],
 })
 export class SharedModule {}

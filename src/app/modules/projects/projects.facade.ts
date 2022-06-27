@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IProject, IProjectListItem, Project, ProjectListItem, ProjectsService } from 'app/core/services';
+import { IFirstStepForm } from './crud-project/components/first-step-form/first-step-form.types';
 import { ProjectState } from './crud-project/state/project.state';
 
 @Injectable({providedIn: 'root'})
@@ -13,33 +14,57 @@ export class ProjectsFacade {
 
   currentProject$ = this._state.currentProject$;
 
-  isLoading$ = this._state.isLoadingProject$;
+  isLoadingList$ = this._state.isLoadingList$;
+
+  isLoadingProject$ = this._state.isLoadingProject$;
 
   loadProjectsList(): void {
-    if (this._state.projectList.length) return;
+    // if (this._state.projectList.length) return;
 
-    this._state.isLoadingProject = true;
+    this._state.isLoadingList = true;
     this._api.getProjects()
       .subscribe((projects: IProjectListItem[]) => {
         this._state.projectList = projects.map((project) => ProjectListItem.fromJson(project));
 
-        this._state.isLoadingProject = false;
+        this._state.isLoadingList = false;
       });
   }
 
   setCurrentProject(id?: number): void {
-    this._state.isLoadingProject = true;
+    this._state.isLoadingList = true;
 
     if (id) {
       this._api.getProjectById(id)
         .subscribe((res: IProject) => {
-          this._state.currentProject = res;
-          this._state.isLoadingProject = false;
+          this._state.currentProject = Project.fromJson(res);
+          this._state.isLoadingList = false;
         });
         return;
     }
 
-    console.log('new project');
     this._state.currentProject = new Project();
+  }
+
+  createNewProject(newProject: IFirstStepForm): void {
+    this._state.isLoadingProject = true;
+
+    this._api.postProject(newProject)
+      .subscribe((res) => {
+        this._state.currentProject = {
+          ...this._state.currentProject,
+          ...Project.fromJson(res),
+        };
+        this._state.isLoadingProject = false;
+      });
+  }
+
+  updateCurrentProject(project: IProject): void {
+    this._state.isLoadingProject = true;
+
+    this._api.putProject(project)
+      .subscribe((res) => {
+        this._state.currentProject = Project.fromJson(res);
+        this._state.isLoadingProject = false;
+      });
   }
 }

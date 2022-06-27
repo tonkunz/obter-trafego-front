@@ -1,6 +1,6 @@
 <div class="w-full max-w-3xl">
   <!-- Form -->
-  <form [formGroup]="firstStepForm" (ngSubmit)="handleSaveNewProject()">
+  <form [formGroup]="firstStepForm" (ngSubmit)="handleSaveProject()">
     <!-- Section -->
     <div class="w-full">
       <div class="text-xl">
@@ -23,7 +23,7 @@
             [svgIcon]="'heroicons_solid:document-text'"
             matPrefix
           ></mat-icon>
-          <input formControlName="title" matInput />
+          <input formControlName="titulo" type="text" matInput />
         </mat-form-field>
       </div>
 
@@ -38,13 +38,13 @@
             svgIcon="google_brand"
             matPrefix
           ></mat-icon>
-          <input formControlName="googleCode" matInput />
+          <input formControlName="googleCodigo" matInput />
 
           <!-- Error on Validate GoogleCode -->
           <mat-error
             *ngIf="
-              firstStepForm.controls.googleCode.hasError('invalidGoogleCode') &&
-              !firstStepForm.controls.googleCode.hasError('required')
+              firstStepForm.controls.googleCodigo.hasError('invalidGoogleCode') &&
+              !firstStepForm.controls.googleCodigo.hasError('required')
             "
           >
             {{ 'projects.form.errors.google-code-invalid' | transloco }}
@@ -63,7 +63,7 @@
             [svgIcon]="'heroicons_solid:globe'"
             matPrefix
           ></mat-icon>
-          <input formControlName="siteUrl" matInput />
+          <input formControlName="siteUrl" type="text" matInput />
         </mat-form-field>
       </div>
     </div>
@@ -73,10 +73,27 @@
 
     <!-- Actions -->
     <div class="flex items-center justify-end">
-      <button mat-stroked-button type="button" (click)="handleBack()">
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="handleBack()"
+        [disabled]="isLoadingProject"
+      >
         {{ "common.cancel" | transloco }}
       </button>
-      <button class="ml-4" mat-flat-button type="submit" color="primary">
+
+      <button
+        class="ml-4"
+        mat-flat-button
+        type="submit"
+        color="primary"
+        [disabled]="isLoadingProject"
+      >
+        <mat-spinner
+          *ngIf="isLoadingProject"
+          [diameter]="20"
+          class="mr-2"
+        ></mat-spinner>
         {{ "common.save" | transloco }}
       </button>
     </div>

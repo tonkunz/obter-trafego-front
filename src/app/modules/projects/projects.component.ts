@@ -31,7 +31,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._facade.isLoading$.subscribe((value) => {
+    this._facade.isLoadingList$.subscribe((value) => {
       this.isLoading = value;
     });
 
