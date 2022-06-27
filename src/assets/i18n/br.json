@@ -43,7 +43,13 @@
       }
     },
     "second-step": {
-      "title": "Configurações Básicas"
+      "title": "Configurações Básicas",
+      "description": "Informações gerais do seu projeto",
+      "resume": "Preencha com as configurações básicas do seu projeto",
+      "auto-renew": "Renovar projeto automaticamente",
+      "rejection-rate": "Taxa de Rejeição",
+      "return-rate": "Taxa de Retorno",
+      "time-on-page": "Tempo por página"
     }
   },
   "common": {
@@ -58,6 +64,8 @@
     "add": "Novo",
     "cancel": "Cancelar",
     "save": "Salvar",
+    "back": "Voltar",
+    "next-step": "Próxima Etapa",
     "project-type": "Tipo do projeto",
     "buy-credits": "Comprar Créditos"
   }

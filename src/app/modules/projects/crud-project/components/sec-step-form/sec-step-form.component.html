@@ -1,0 +1,92 @@
+<div class="w-full max-w-3xl">
+  <form [formGroup]="basicSettingsForm" (ngSubmit)="handleSubmit()">
+    <!-- Header -->
+    <div class="w-full">
+      <!-- <div class="text-xl">
+        {{ "projects.second-step.title" | transloco }}
+      </div> -->
+      <div class="text-secondary">
+        {{ "projects.second-step.resume" | transloco }}
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <mat-slide-toggle
+        formControlName="renovacaoAutomatica"
+      >
+        <span
+          [ngClass]="{ 'font-bold': basicSettingsForm.value.renovacaoAutomatica }"
+        >
+         {{ "projects.second-step.auto-renew" | transloco }}
+        </span>
+      </mat-slide-toggle>
+    </div>
+
+    <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+      <div class="sm:col-span-4">
+        <mat-label>
+          {{ "projects.second-step.rejection-rate" | transloco }}
+          <strong>{{ basicSettingsForm.value.taxaRejeicao }}%</strong>
+        </mat-label>
+        <mat-slider
+          class="w-full"
+          min="0"
+          max="100"
+          formControlName="taxaRejeicao"
+        ></mat-slider>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+      <div class="sm:col-span-4">
+        <mat-label>
+          {{ "projects.second-step.return-rate" | transloco }}
+          <strong>{{ basicSettingsForm.value.taxaRetorno }}%</strong>
+        </mat-label>
+        <mat-slider
+          class="w-full"
+          min="0"
+          max="100"
+          formControlName="taxaRetorno"
+        ></mat-slider>
+      </div>
+    </div>
+
+    <!-- Tempo por página -->
+    <div class="sm:col-span-4 mt-4">
+      <mat-form-field class="fuse-mat-no-subscript w-full">
+        <mat-label>
+          {{ "projects.second-step.time-on-page" | transloco }}
+        </mat-label>
+        <mat-icon
+          class="icon-size-5"
+          [svgIcon]="'heroicons_solid:clock'"
+          matPrefix
+        ></mat-icon>
+        <input formControlName="tempoPagina" type="text" matInput />
+      </mat-form-field>
+    </div>
+
+    <!-- Divider -->
+    <div class="mt-11 mb-10 border-t"></div>
+
+    <div class="flex items-center justify-end">
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="handleBack()"
+      >
+      {{ "common.back" | transloco }}
+      </button>
+
+      <button
+        class="ml-4"
+        mat-flat-button
+        type="submit"
+        color="primary"
+      >
+        {{ "common.next-step" | transloco }}
+      </button>
+    </div>
+  </form>
+</div>

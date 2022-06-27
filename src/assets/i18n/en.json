@@ -43,7 +43,13 @@
       }
     },
     "second-step": {
-      "title": "Basic Settings"
+      "title": "Basic Settings",
+      "description": "General Settings of your project",
+      "resume": "Fill with the basic settings of your Project",
+      "auto-renew": "Automatically Renew The project",
+      "rejection-rate": "Rejection Rate",
+      "return-rate": "Return Rate",
+      "time-on-page": "Time on Page"
     }
   },
   "common": {
@@ -58,6 +64,8 @@
     "add": "Add",
     "cancel": "Cancel",
     "save": "Save",
+    "back": "Back",
+    "next-step": "Next Step",
     "project-type": "Project Type",
     "buy-credits": "Buy Credits"
   }

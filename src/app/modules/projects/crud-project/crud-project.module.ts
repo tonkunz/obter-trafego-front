@@ -11,6 +11,9 @@ import { FirstStepFormComponent } from './components/first-step-form/first-step-
 import { ProjectState } from './state/project.state';
 import { ProjectsFacade } from '../projects.facade';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SecStepComponent } from './components/sec-step-form/sec-step-form.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const routes: Route[] = [
   {
@@ -20,7 +23,11 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  declarations: [CrudProjectComponent, FirstStepFormComponent],
+  declarations: [
+    CrudProjectComponent,
+    FirstStepFormComponent,
+    SecStepComponent,
+  ],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
@@ -30,6 +37,8 @@ const routes: Route[] = [
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatSliderModule,
+    MatSlideToggleModule,
   ],
   providers: [
     ProjectState,
