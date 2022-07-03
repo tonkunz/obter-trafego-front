@@ -30,7 +30,8 @@ export class SecStepComponent implements OnInit {
   }
 
   handleBack(): void {
-    this._location.back();
+    //TODO: Voltar para o step anterior
+    // this._location.back();
   }
 
   handleSubmit(): void {

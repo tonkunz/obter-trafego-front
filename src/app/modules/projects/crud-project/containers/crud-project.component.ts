@@ -8,7 +8,7 @@ import {
 import { MatDrawer } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { Project, ProjectsService } from 'app/core/services';
+import { Project } from 'app/core/services';
 import { ICreditItem } from 'app/core/services/credits/credits.types';
 import { Subject, takeUntil } from 'rxjs';
 import { ProjectsFacade } from '../../projects.facade';
@@ -39,7 +39,6 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
     private _changeDetectorRef: ChangeDetectorRef,
     private _fuseMediaWatcherService: FuseMediaWatcherService,
     private _router: Router,
-    private _projectsService: ProjectsService,
     private _activatedRoute: ActivatedRoute,
     private _projectsFacade: ProjectsFacade
   ) {

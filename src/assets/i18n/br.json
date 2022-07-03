@@ -50,6 +50,17 @@
       "rejection-rate": "Taxa de Rejeição",
       "return-rate": "Taxa de Retorno",
       "time-on-page": "Tempo por página"
+    },
+    "third-step": {
+      "title": "Configurações de Segmento",
+      "description": "Gerencie seus alvos, dispositivos e locais de segmentação geográfica",
+      "device-type": "Tipo de Dispositivo",
+      "desktop-rate": "Taxa Desktop",
+      "mobile-rate": "Taxa Mobile",
+      "traffic-type": "Tipo de Tráfego",
+      "organic-rate": "Taxa Orgânica",
+      "direct-rate": "Taxa Direta",
+      "referral-rate": "Taxa de Referência"
     }
   },
   "common": {
@@ -67,6 +78,7 @@
     "back": "Voltar",
     "next-step": "Próxima Etapa",
     "project-type": "Tipo do projeto",
-    "buy-credits": "Comprar Créditos"
+    "buy-credits": "Comprar Créditos",
+    "devices": "Dispositivos"
   }
 }

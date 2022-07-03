@@ -14,8 +14,7 @@ export const panelOptions: any[] = [
   {
     id: 'third-step',
     icon: 'heroicons_outline:globe',
-    title: 'Targeting Settings',
-    description:
-      'Manage your subscription plan, payment method and billing information',
+    title: 'projects.third-step.title',
+    description: 'projects.third-step.description',
   },
 ];

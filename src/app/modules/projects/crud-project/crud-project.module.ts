@@ -14,6 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SecStepComponent } from './components/sec-step-form/sec-step-form.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ThirdStepComponent } from './components/third-step-form/third-step-form.component';
 
 const routes: Route[] = [
   {
@@ -27,6 +28,7 @@ const routes: Route[] = [
     CrudProjectComponent,
     FirstStepFormComponent,
     SecStepComponent,
+    ThirdStepComponent,
   ],
   imports: [
     SharedModule,

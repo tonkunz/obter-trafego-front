@@ -1,0 +1,139 @@
+<div class="w-full max-w-3xl">
+  <form [formGroup]="targetSettingsForm" (ngSubmit)="handleSubmit()">
+    <!-- Header -->
+    <div class="w-full">
+      <!-- <div class="text-xl">
+        {{ "projects.second-step.title" | transloco }}
+      </div> -->
+      <div class="text-secondary">
+        {{ "projects.third-step.description" | transloco }}
+      </div>
+    </div>
+
+    <span class="font-semibold text-xl mt-8">
+      {{ "projects.third-step.device-type" | transloco }}
+    </span>
+
+    <!-- Device Rates -->
+    <div class="flex flex-col lg:flex-row">
+      <!-- Taxa Desktop -->
+      <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+        <div class="sm:col-span-4">
+          <mat-label class="flex items-center">
+            <mat-icon svgIcon="heroicons_outline:device-mobile"></mat-icon>
+            <span class="mx-1">
+              {{ "projects.third-step.desktop-rate" | transloco }}
+            </span>
+            <strong>{{ targetSettingsForm.value.taxaDesktop }}%</strong>
+          </mat-label>
+          <mat-slider
+            class="w-full"
+            min="0"
+            max="100"
+            formControlName="taxaDesktop"
+          ></mat-slider>
+        </div>
+      </div>
+
+      <!-- Taxa Mobile -->
+      <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+        <div class="sm:col-span-4">
+          <mat-label class="flex items-center">
+            <mat-icon svgIcon="heroicons_outline:desktop-computer"></mat-icon>
+            <span class="mx-1">
+              {{ "projects.third-step.mobile-rate" | transloco }}
+            </span>
+            <strong>{{ targetSettingsForm.value.taxaMobile }}%</strong>
+          </mat-label>
+          <mat-slider
+            class="w-full"
+            min="0"
+            max="100"
+            formControlName="taxaMobile"
+          ></mat-slider>
+        </div>
+      </div>
+    </div>
+
+    <!-- Traffic Rates -->
+    <div class="mt-8">
+      <span class="font-semibold text-xl">
+        {{ "projects.third-step.traffic-type" | transloco }}
+      </span>
+
+      <!-- Taxa Organica -->
+      <div class="grid sm:grid-cols-4 gap-6 w-full mt-4">
+        <div class="sm:col-span-4">
+          <mat-label class="flex items-center">
+            <span class="mr-1">
+              {{ "projects.third-step.organic-rate" | transloco }}
+            </span>
+            <strong>{{ targetSettingsForm.value.taxaOrganica }}%</strong>
+          </mat-label>
+          <mat-slider
+            class="w-full"
+            min="0"
+            max="100"
+            formControlName="taxaOrganica"
+            (focus)="onFocus('taxaOrganica')"
+          ></mat-slider>
+        </div>
+      </div>
+
+      <!-- Taxa Direta-->
+      <div class="grid sm:grid-cols-4 gap-6 w-full mt-4">
+        <div class="sm:col-span-4">
+          <mat-label class="flex items-center">
+            <span class="mr-1">
+              {{ "projects.third-step.direct-rate" | transloco }}
+            </span>
+            <strong>{{ targetSettingsForm.value.taxaDireto }}%</strong>
+          </mat-label>
+          <mat-slider
+            class="w-full"
+            min="0"
+            max="100"
+            formControlName="taxaDireto"
+            (focus)="onFocus('taxaDireto')"
+          ></mat-slider>
+        </div>
+      </div>
+
+      <!-- Taxa Direta-->
+      <div class="grid sm:grid-cols-4 gap-6 w-full mt-4">
+        <div class="sm:col-span-4">
+          <mat-label class="flex items-center">
+            <span class="mr-1">
+              {{ "projects.third-step.referral-rate" | transloco }}
+            </span>
+            <strong>{{ targetSettingsForm.value.taxaReferencia }}%</strong>
+          </mat-label>
+          <mat-slider
+            class="w-full"
+            min="0"
+            max="100"
+            formControlName="taxaReferencia"
+            (focus)="onFocus('taxaReferencia')"
+          ></mat-slider>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="mt-11 mb-10 border-t"></div>
+
+    <div class="flex items-center justify-end">
+      <button mat-stroked-button type="button" (click)="handleBack()">
+        {{ "common.back" | transloco }}
+      </button>
+
+      <button class="ml-4" mat-flat-button type="submit" color="primary">
+        {{ "common.next-step" | transloco }}
+      </button>
+    </div>
+
+    <pre>
+      {{ targetSettingsForm.value | json}}
+    </pre>
+  </form>
+</div>

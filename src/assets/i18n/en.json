@@ -50,6 +50,17 @@
       "rejection-rate": "Rejection Rate",
       "return-rate": "Return Rate",
       "time-on-page": "Time on Page"
+    },
+    "third-step": {
+      "title": "Targeting Settings",
+      "description": "Manage your targets, device and Geo-Targeting Locations",
+      "device-type": "Device Type",
+      "desktop-rate": "Desktop Rate",
+      "mobile-rate": "Mobile Rate",
+      "traffic-type": "Traffic Type",
+      "organic-rate": "Organic Rate",
+      "direct-rate": "Direct Rate",
+      "referral-rate": "Referral Rate"
     }
   },
   "common": {
@@ -67,6 +78,7 @@
     "back": "Back",
     "next-step": "Next Step",
     "project-type": "Project Type",
-    "buy-credits": "Buy Credits"
+    "buy-credits": "Buy Credits",
+    "devices": "Devices"
   }
 }

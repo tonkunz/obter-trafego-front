@@ -107,7 +107,7 @@
         <!-- Load settings panel -->
         <div class="mt-8">
           <ng-container [ngSwitch]="selectedPanel">
-            <!-- Account -->
+            <!-- First Step -->
             <ng-container *ngSwitchCase="'first-step'">
               <first-step-form
                 [projectTypeId]="projectType?.id"
@@ -116,11 +116,19 @@
                 (saveProject)="handleFirstStepForm($event)"
               ></first-step-form>
             </ng-container>
-            <!-- Security -->
+
+            <!-- Sec Step -->
             <ng-container *ngSwitchCase="'second-step'">
               <sec-step-form
               ></sec-step-form>
             </ng-container>
+
+            <!-- Third Step -->
+            <ng-container *ngSwitchCase="'third-step'">
+              <third-step-form
+              ></third-step-form>
+            </ng-container>
+
           </ng-container>
         </div>
       </div>
