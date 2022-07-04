@@ -13,8 +13,14 @@ export const panelOptions: any[] = [
   },
   {
     id: 'third-step',
-    icon: 'heroicons_outline:globe',
+    icon: 'heroicons_outline:chart-pie',
     title: 'projects.third-step.title',
     description: 'projects.third-step.description',
+  },
+  {
+    id: 'fourth-step',
+    icon: 'heroicons_outline:location-marker',
+    title: 'projects.fourth-step.title',
+    description: 'projects.fourth-step.description',
   },
 ];

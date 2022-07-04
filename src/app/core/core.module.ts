@@ -3,6 +3,7 @@ import { AuthModule } from 'app/core/auth/auth.module';
 import { IconsModule } from 'app/core/icons/icons.module';
 import { TranslocoCoreModule } from 'app/core/transloco/transloco.module';
 import { CreditsService, ProjectsService } from './services';
+import { LocationsService } from './services/locations/locations.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { CreditsService, ProjectsService } from './services';
   providers: [
     CreditsService,
     ProjectsService,
+    LocationsService,
   ]
 })
 export class CoreModule {

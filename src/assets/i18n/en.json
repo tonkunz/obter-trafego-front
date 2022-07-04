@@ -61,6 +61,10 @@
       "organic-rate": "Organic Rate",
       "direct-rate": "Direct Rate",
       "referral-rate": "Referral Rate"
+    },
+    "fourth-step": {
+      "title": "Location Settings",
+      "description": "Define the location of accesses and their respective rates"
     }
   },
   "common": {

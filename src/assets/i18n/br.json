@@ -61,6 +61,10 @@
       "organic-rate": "Taxa Orgânica",
       "direct-rate": "Taxa Direta",
       "referral-rate": "Taxa de Referência"
+    },
+    "fourth-step": {
+      "title": "Configurações de Localidade",
+      "description": "Defina a localização dos acessos e suas respectivas taxas"
     }
   },
   "common": {

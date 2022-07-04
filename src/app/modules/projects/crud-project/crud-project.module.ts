@@ -15,6 +15,9 @@ import { SecStepComponent } from './components/sec-step-form/sec-step-form.compo
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ThirdStepComponent } from './components/third-step-form/third-step-form.component';
+import { FourthStepComponent } from './components/fourth-step-form/fourth-step-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const routes: Route[] = [
   {
@@ -29,6 +32,7 @@ const routes: Route[] = [
     FirstStepFormComponent,
     SecStepComponent,
     ThirdStepComponent,
+    FourthStepComponent,
   ],
   imports: [
     SharedModule,
@@ -41,6 +45,8 @@ const routes: Route[] = [
     MatProgressSpinnerModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatSelectModule,
+    MatAutocompleteModule,
   ],
   providers: [
     ProjectState,
