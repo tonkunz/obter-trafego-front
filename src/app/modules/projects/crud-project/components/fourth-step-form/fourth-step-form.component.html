@@ -1,26 +1,29 @@
 <div class="w-full max-w-3xl">
-  <form [formGroup]="locationForm">
+  <form [formGroup]="locationForm" (ngSubmit)="handleSubmit()">
+    <div class="text-secondary w-full">
+      {{ "projects.fourth-step.resume" | transloco }}
+    </div>
 
     <!-- Form Array -->
     <ng-container formArrayName="localizacoes">
       <ng-container *ngFor="let localizacaoForm of localizacoes.controls; let i = index">
         <!-- Localizacao form Row -->
-        <div [formGroup]="localizacaoForm" class="flex w-full">
-
-          <mat-form-field class="example-full-width w-full mr-1" appearance="fill">
-            <mat-label>Cidade</mat-label>
+        <div [formGroup]="localizacaoForm" class="flex w-full mt-2">
+          <mat-form-field class="w-full mr-1" appearance="fill">
+            <mat-label>{{ 'projects.fourth-step.city' | transloco }}</mat-label>
             <input
               type="text"
               matInput
               formControlName="busca"
               [matAutocomplete]="auto"
+              placeholder="Digite o nome da cidade para buscar"
               (focus)="handleFocus(i)"
             >
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option
                 *ngFor="let location of filteredLocations | async"
                 [value]="location"
-                (click)="handleLocationOption(location)"
+                (click)="handleLocationOption(location, i)"
               >
                 {{ location.cidade }} - {{ location.estado }}
               </mat-option>
@@ -28,7 +31,7 @@
           </mat-form-field>
 
           <mat-form-field class="fuse-mat-no-subscript w-40 ml-1">
-            <mat-label>Taxa</mat-label>
+            <mat-label>{{ 'common.rate' | transloco }}</mat-label>
             <input matInput formControlName="taxa" type="text">
           </mat-form-field>
 
@@ -39,16 +42,18 @@
         </div>
 
         <!-- Divider -->
-        <div class="mt-4 mb-4 border-t"></div>
+        <!-- <div class="mt-4 mb-4 border-t"></div> -->
       </ng-container>
     </ng-container>
 
-    <div>
-      <button mat-button (click)="addLocation()">
-        <mat-icon svgIcon="heroicons_outline:plus-sm" class="mr-2"></mat-icon>
-        <span>Adicionar mais uma localidade</span>
-      </button>
-    </div>
+    <button
+      class="btn-dashed mt-6"
+      type="button"
+      (click)="addLocation()"
+    >
+      <mat-icon svgIcon="heroicons_outline:plus-sm" class="mr-2"></mat-icon>
+      <span>{{ 'projects.fourth-step.add-btn' | transloco }}</span>
+    </button>
 
     <!-- Divider -->
     <div class="mt-11 mb-10 border-t"></div>

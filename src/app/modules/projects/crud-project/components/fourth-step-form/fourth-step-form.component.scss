@@ -1,0 +1,8 @@
+.btn-dashed {
+  @apply flex mt-2 items-center justify-center p-4 w-full rounded-2xl h-22
+        font-bold text-gray-500 transition-all border-dashed border border-gray-300;
+
+  &:hover {
+    @apply cursor-pointer bg-card shadow-lg border-transparent opacity-75;
+  }
+}

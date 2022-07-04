@@ -7,6 +7,7 @@ import { map, Observable, ReplaySubject, startWith, takeUntil } from 'rxjs';
 @Component({
   selector: 'fourth-step-form',
   templateUrl: 'fourth-step-form.component.html',
+  styleUrls: ['./fourth-step-form.component.scss'],
 })
 export class FourthStepComponent implements OnInit, OnDestroy {
   @Input() locationData;
@@ -32,8 +33,6 @@ export class FourthStepComponent implements OnInit, OnDestroy {
 
     this._locationsService.locationsList$
       .subscribe( (value: ILocation[]) => this.locationsList = value);
-
-
   }
 
   ngOnDestroy(): void {
@@ -52,16 +51,24 @@ export class FourthStepComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this._unsubscribeAll$),
         startWith(''),
-        map(busca => busca ? this._filter(busca as string) : this.locationsList.slice()),
+        map((nomeBusca: string | ILocation) => {
+          const nomeCidade = typeof nomeBusca === 'string' ? nomeBusca : nomeBusca?.cidade;
+          return nomeCidade ? this._filter(nomeCidade as string) : this.locationsList.slice();
+        }),
       );
   }
 
-  handleLocationOption(option: ILocation) {
-    console.log('handleLocationOption: ', option);
+  handleLocationOption(option: ILocation, index: number) {
+    console.log('handleLocationOption: ', );
+    const { id, cidade, estado } = this.localizacoes.controls[index]['controls'];
+
+    id.setValue(option.id);
+    cidade.setValue(option.cidade);
+    estado.setValue(option.estado);
   }
 
   displayFn(cidade: ILocation): string {
-    return cidade && cidade.cidade ? cidade.cidade : '';
+    return cidade && cidade.cidade ? `${cidade.cidade} - ${cidade.estado}` : '';
   }
 
   private _filter(cidade: string): ILocation[] {
@@ -96,6 +103,6 @@ export class FourthStepComponent implements OnInit, OnDestroy {
   }
 
   handleSubmit(): void {
-    console.log('submit');
+    console.log('submit: ', this.locationForm.value);
   }
 }

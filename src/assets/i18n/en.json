@@ -64,7 +64,10 @@
     },
     "fourth-step": {
       "title": "Location Settings",
-      "description": "Define the location of accesses and their respective rates"
+      "description": "Define the location of accesses and their respective rates",
+      "resume": "Search for a city, click and add it. After that, enter the access fee for this respective city. Remember that the sum of fees cannot exceed 100%.",
+      "city": "City",
+      "add-btn": "Add one more place"
     }
   },
   "common": {
@@ -83,6 +86,7 @@
     "next-step": "Next Step",
     "project-type": "Project Type",
     "buy-credits": "Buy Credits",
-    "devices": "Devices"
+    "devices": "Devices",
+    "rate": "Rate"
   }
 }

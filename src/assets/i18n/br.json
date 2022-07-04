@@ -64,7 +64,10 @@
     },
     "fourth-step": {
       "title": "Configurações de Localidade",
-      "description": "Defina a localização dos acessos e suas respectivas taxas"
+      "description": "Defina a localização dos acessos e suas respectivas taxas",
+      "resume": "Procure uma cidade, clique e adicione a mesma. Após isto, coloque a taxa de acesso para esta respectiva cidade. Lembre-se que a soma das taxas não pode passar de 100%.",
+      "city": "Cidade",
+      "add-btn": "Adicionar mais uma localidade"
     }
   },
   "common": {
@@ -83,6 +86,7 @@
     "next-step": "Próxima Etapa",
     "project-type": "Tipo do projeto",
     "buy-credits": "Comprar Créditos",
-    "devices": "Dispositivos"
+    "devices": "Dispositivos",
+    "rate": "Taxa"
   }
 }
