@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocationsService } from 'app/core/services/locations/locations.service';
 import { ILocation } from 'app/core/services/locations/locations.types';
+import { ProjectsFacade } from 'app/modules/projects/projects.facade';
 import { map, Observable, ReplaySubject, startWith, takeUntil } from 'rxjs';
 import { BaseStepFormComponent } from '../base/base-step-form.component';
 
@@ -25,14 +26,18 @@ export class FourthStepComponent extends BaseStepFormComponent implements OnInit
 
   constructor(
     private _fb: FormBuilder,
-    private _locationsService: LocationsService
+    private _locationsService: LocationsService,
+    private _facade: ProjectsFacade,
   ) {
     super();
   }
 
   ngOnInit() {
     this.createForm();
-    this.addLocation();
+
+    if (!this._facade.getFourthStepInfo().length) {
+      this.addLocation();
+    }
 
     this._locationsService.locationsList$
       .subscribe( (value: ILocation[]) => this.locationsList = value);
@@ -47,6 +52,16 @@ export class FourthStepComponent extends BaseStepFormComponent implements OnInit
     this.locationForm = this._fb.group({
       localizacoes: this._fb.array([]),
     });
+
+    // Create with values
+    if (this._facade.getFourthStepInfo().length) {
+      this._facade.getFourthStepInfo()
+        .forEach((localizacao: ILocation) => this.addLocation(localizacao));
+    }
+
+    this.locationForm.controls.localizacoes.valueChanges
+      .pipe(takeUntil(this.unsubscribeAll$))
+      .subscribe((values) => this._facade.updateFourthStepInfo(values));
   }
 
   handleFocus(index: number) {
@@ -62,7 +77,6 @@ export class FourthStepComponent extends BaseStepFormComponent implements OnInit
   }
 
   handleLocationOption(option: ILocation, index: number) {
-    console.log('handleLocationOption: ', );
     const { id, cidade, estado } = this.localizacoes.controls[index]['controls'];
 
     id.setValue(option.id);
@@ -85,13 +99,17 @@ export class FourthStepComponent extends BaseStepFormComponent implements OnInit
     return this.locationForm.controls['localizacoes'] as FormArray;
   }
 
-  addLocation() {
+  addLocation(initData?: ILocation) {
     const locationForm = this._fb.group({
-      id: ['', [Validators.required]],
-      busca: ['', [Validators.required]],
-      cidade: ['', [Validators.required]],
-      estado: ['', [Validators.required]],
-      taxa: [0, [Validators.required]],
+      id: [initData?.id || '', [Validators.required]],
+      // busca: [
+      //   (initData?.busca && `${initData.cidade} - ${initData.estado}`) || '',
+      //   [Validators.required],
+      // ],
+      busca: [initData?.busca || '', [Validators.required]],
+      cidade: [initData?.cidade || '', [Validators.required]],
+      estado: [initData?.estado || '', [Validators.required]],
+      taxa: [initData?.taxa || 0, [Validators.required]],
     });
 
     this.localizacoes.push(locationForm);
@@ -99,9 +117,5 @@ export class FourthStepComponent extends BaseStepFormComponent implements OnInit
 
   deleteLocation(locationIndex: number) {
     this.localizacoes.removeAt(locationIndex);
-  }
-
-  handleSubmit(): void {
-    console.log('submit: ', this.locationForm.value);
   }
 }

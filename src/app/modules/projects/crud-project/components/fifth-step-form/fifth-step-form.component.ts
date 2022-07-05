@@ -37,8 +37,6 @@ export class FifthStepComponent extends BaseStepFormComponent {
   }
 
   remove(value: string, collection: string): void {
-    console.log('remove value: ', value, collection);
-
     if (collection === 'links' ) {
       const index = this.links.indexOf(value);
 

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { IProject, IProjectListItem, Project, ProjectListItem, ProjectsService } from 'app/core/services';
+import { ILocalizacao, IProject, IProjectListItem, Project, ProjectListItem, ProjectsService } from 'app/core/services';
+import { ILocation } from 'app/core/services/locations/locations.types';
 import { IFirstStepForm } from './crud-project/components/first-step-form/first-step-form.types';
 import { ProjectState } from './crud-project/state/project.state';
+import { IBasicSettingsData, ITargetSettingsData } from './projects.types';
 
 @Injectable({providedIn: 'root'})
 export class ProjectsFacade {
@@ -21,8 +23,6 @@ export class ProjectsFacade {
   isLoadingProject$ = this._state.isLoadingProject$;
 
   loadProjectsList(): void {
-    // if (this._state.projectList.length) return;
-
     this._state.isLoadingList = true;
     this._api.getProjects()
       .subscribe((projects: IProjectListItem[]) => {
@@ -57,7 +57,6 @@ export class ProjectsFacade {
           ...Project.fromJson(res),
         };
         this._state.isLoadingProject = false;
-        console.log('res: ', res);
         this._router.navigate(['projects/edit-project/', res.id])
       });
   }
@@ -70,5 +69,82 @@ export class ProjectsFacade {
         this._state.currentProject = Project.fromJson(res);
         this._state.isLoadingProject = false;
       });
+  }
+
+  //
+  //
+  // Second Step Handlers
+  getSecStepInfo(): IBasicSettingsData {
+    const {
+      renovacaoAutomatica,
+      taxaRejeicao,
+      taxaRetorno,
+      tempoPagina
+    } = this._state.currentProject;
+
+    return {
+      renovacaoAutomatica,
+      taxaRejeicao,
+      taxaRetorno,
+      tempoPagina,
+    };
+  }
+
+  updateSecStepInfo(info: IBasicSettingsData): void {
+    this._state.currentProject = {
+      ...this._state.currentProject,
+      renovacaoAutomatica: info.renovacaoAutomatica,
+      taxaRejeicao: info.taxaRejeicao,
+      taxaRetorno: info.taxaRetorno,
+      tempoPagina: info.tempoPagina,
+    }
+  }
+
+  //
+  //
+  // Third Step Handlers
+  getThirdStepInfo(): ITargetSettingsData {
+    const {
+      taxaDesktop,
+      taxaMobile,
+      taxaOrganica,
+      taxaDireto,
+      taxaReferencia,
+    } = this._state.currentProject;
+
+    return {
+      taxaDesktop,
+      taxaMobile,
+      taxaOrganica,
+      taxaDireto,
+      taxaReferencia,
+    }
+  }
+
+  updateThirdStepInfo(info: ITargetSettingsData): void {
+    this._state.currentProject = {
+      ...this._state.currentProject,
+      taxaDesktop: info.taxaDesktop,
+      taxaMobile: info.taxaMobile,
+      taxaOrganica: info.taxaOrganica,
+      taxaDireto: info.taxaDireto,
+      taxaReferencia: info.taxaReferencia,
+    }
+  }
+
+  //
+  //
+  // Fourth Step Handlers
+  getFourthStepInfo(): ILocalizacao[] {
+    return this._state.currentProject.localizacoes;
+  }
+
+  updateFourthStepInfo(info: ILocation[]): void {
+    const newLocations: ILocation[] = info.length !== 0 ? [...info] : [];
+
+    this._state.currentProject = {
+      ...this._state.currentProject,
+      localizacoes: newLocations,
+    }
   }
 }

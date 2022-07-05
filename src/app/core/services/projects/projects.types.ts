@@ -3,16 +3,16 @@ export interface IProject {
   titulo: string;
   siteUrl: string;
   renovacaoAutomatica: boolean;
-  taxaRejeicao: string;
-  taxaRetorno: string;
+  taxaRejeicao: number;
+  taxaRetorno: number;
   tempoPagina: string;
   feedUrl: string;
   googleCodigo: string;
-  taxaDireto: string;
-  taxaReferencia: string;
-  taxaOrganica: string;
-  taxaDesktop: string;
-  taxaMobile: string;
+  taxaDireto: number;
+  taxaReferencia: number;
+  taxaOrganica: number;
+  taxaDesktop: number;
+  taxaMobile: number;
   inicio: string;
   fim: string;
   status: string;
@@ -25,7 +25,7 @@ export interface IProject {
   referencias: Referencia[];
   palavras: Palavra[];
   links: Link[];
-  localizacoes: Localizaco[];
+  localizacoes: ILocalizacao[];
 }
 
 export class Project implements IProject {
@@ -33,16 +33,16 @@ export class Project implements IProject {
   titulo: string;
   siteUrl: string;
   renovacaoAutomatica: boolean;
-  taxaRejeicao: string;
-  taxaRetorno: string;
+  taxaRejeicao: number;
+  taxaRetorno: number;
   tempoPagina: string;
   feedUrl: string;
   googleCodigo: string;
-  taxaDireto: string;
-  taxaReferencia: string;
-  taxaOrganica: string;
-  taxaDesktop: string;
-  taxaMobile: string;
+  taxaDireto: number;
+  taxaReferencia: number;
+  taxaOrganica: number;
+  taxaDesktop: number;
+  taxaMobile: number;
   inicio: string;
   fim: string;
   status: string;
@@ -55,23 +55,23 @@ export class Project implements IProject {
   referencias: Referencia[];
   palavras: Palavra[];
   links: Link[];
-  localizacoes: Localizaco[];
+  localizacoes: ILocalizacao[];
 
   constructor() {
     this.id = null;
     this.titulo = '';
     this.siteUrl = '';
     this.renovacaoAutomatica = false;
-    this.taxaRejeicao = '';
-    this.taxaRetorno = '';
+    this.taxaRejeicao = 0;
+    this.taxaRetorno = 0;
     this.tempoPagina = '';
     this.feedUrl = '';
     this.googleCodigo = '';
-    this.taxaDireto = '';
-    this.taxaReferencia = '';
-    this.taxaOrganica = '';
-    this.taxaDesktop = '';
-    this.taxaMobile = '';
+    this.taxaDireto = 0;
+    this.taxaReferencia = 0;
+    this.taxaOrganica = 0;
+    this.taxaDesktop = 0;
+    this.taxaMobile = 0;
     this.inicio = '';
     this.fim = '';
     this.status = '';
@@ -173,11 +173,12 @@ export interface Link {
   url: string;
 }
 
-export interface Localizaco {
+export interface ILocalizacao {
   id: number;
   cidade: string;
   estado: string;
-  taxa: string;
+  taxa?: number;
+  busca?: string;
 }
 
 //
