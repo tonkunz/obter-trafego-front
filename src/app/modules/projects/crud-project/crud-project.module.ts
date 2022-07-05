@@ -1,23 +1,29 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { SharedModule } from 'app/shared/shared.module';
+import { CrudProjectComponent } from './containers/crud-project.component';
+import { ProjectState } from './state/project.state';
+import { ProjectsFacade } from '../projects.facade';
+
+// Material Imports
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { CrudProjectComponent } from './containers/crud-project.component';
-import { FirstStepFormComponent } from './components/first-step-form/first-step-form.component';
-import { ProjectState } from './state/project.state';
-import { ProjectsFacade } from '../projects.facade';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SecStepComponent } from './components/sec-step-form/sec-step-form.component';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+
+// Step Components
+import { FirstStepFormComponent } from './components/first-step-form/first-step-form.component';
+import { SecStepComponent } from './components/sec-step-form/sec-step-form.component';
 import { ThirdStepComponent } from './components/third-step-form/third-step-form.component';
 import { FourthStepComponent } from './components/fourth-step-form/fourth-step-form.component';
-import { MatSelectModule } from '@angular/material/select';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FifthStepComponent } from './components/fifth-step-form/fifth-step-form.component';
 
 const routes: Route[] = [
   {
@@ -33,6 +39,7 @@ const routes: Route[] = [
     SecStepComponent,
     ThirdStepComponent,
     FourthStepComponent,
+    FifthStepComponent,
   ],
   imports: [
     SharedModule,
@@ -47,6 +54,7 @@ const routes: Route[] = [
     MatSlideToggleModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatChipsModule,
   ],
   providers: [
     ProjectState,

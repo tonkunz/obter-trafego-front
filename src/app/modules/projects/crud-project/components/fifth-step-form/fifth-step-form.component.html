@@ -1,0 +1,93 @@
+<div class="w-full max-w-3xl">
+  <form >
+    <!-- Links Chiplist -->
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Links</mat-label>
+      <mat-chip-list #linksChipList>
+
+        <mat-chip *ngFor="let link of links" (removed)="remove(link, 'links')">
+          {{link}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+
+        <input
+          [placeholder]="'projects.fifth-step.references-new' | transloco"
+          [matChipInputFor]="linksChipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event, 'links')"
+        >
+      </mat-chip-list>
+    </mat-form-field>
+
+    <!-- Words Chiplist -->
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>
+        {{ 'projects.fifth-step.words' | transloco }}
+      </mat-label>
+      <mat-chip-list #palavrasChipList>
+
+        <mat-chip
+          *ngFor="let palavra of palavras"
+          (removed)="remove(palavra, 'palavras')"
+        >
+          {{palavra}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+
+        <input
+          [placeholder]="'projects.fifth-step.references-new' | transloco"
+          [matChipInputFor]="palavrasChipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event, 'palavras')"
+        >
+      </mat-chip-list>
+    </mat-form-field>
+
+    <!-- References Chiplist -->
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>
+        {{ 'projects.fifth-step.references' | transloco }}
+      </mat-label>
+      <mat-chip-list #referencesChipList>
+
+        <mat-chip
+          *ngFor="let referencia of referencias"
+          (removed)="remove(referencia, 'referencias')"
+          [color]="'primary'"
+        >
+          {{referencia}}
+          <button>
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </button>
+        </mat-chip>
+
+        <input
+          [placeholder]="'projects.fifth-step.references-new' | transloco"
+          [matChipInputFor]="referencesChipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event, 'referencias')"
+        >
+      </mat-chip-list>
+    </mat-form-field>
+
+    <!-- Divider -->
+    <div class="mt-11 mb-10 border-t"></div>
+
+    <div class="flex items-center justify-end">
+      <button mat-stroked-button type="button" (click)="handleBack()">
+        {{ "common.back" | transloco }}
+      </button>
+
+      <button class="ml-4" mat-flat-button type="submit" color="primary">
+        {{ "common.next-step" | transloco }}
+      </button>
+    </div>
+  </form>
+</div>

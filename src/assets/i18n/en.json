@@ -68,6 +68,13 @@
       "resume": "Search for a city, click and add it. After that, enter the access fee for this respective city. Remember that the sum of fees cannot exceed 100%.",
       "city": "City",
       "add-btn": "Add one more place"
+    },
+    "fifth-step": {
+      "title": "URLs, Palavras e Referências ",
+      "description": "Add here the URLs, set of search keywords and references as well",
+      "references": "References",
+      "references-new": "New Reference...",
+      "words": "Words"
     }
   },
   "common": {

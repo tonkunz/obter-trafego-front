@@ -23,4 +23,10 @@ export const panelOptions: any[] = [
     title: 'projects.fourth-step.title',
     description: 'projects.fourth-step.description',
   },
+  {
+    id: 'fifth-step',
+    icon: 'heroicons_outline:link',
+    title: 'projects.fifth-step.title',
+    description: 'projects.fifth-step.description',
+  },
 ];

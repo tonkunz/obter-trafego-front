@@ -68,6 +68,13 @@
       "resume": "Procure uma cidade, clique e adicione a mesma. Após isto, coloque a taxa de acesso para esta respectiva cidade. Lembre-se que a soma das taxas não pode passar de 100%.",
       "city": "Cidade",
       "add-btn": "Adicionar mais uma localidade"
+    },
+    "fifth-step": {
+      "title": "URLs, Palavras e Referências ",
+      "description": "Adicione aqui as URLs, conjunto de palavras-chave da busca bem como as referências",
+      "references": "Referências",
+      "references-new": "Adicionar referência...",
+      "words": "Palavras"
     }
   },
   "common": {
