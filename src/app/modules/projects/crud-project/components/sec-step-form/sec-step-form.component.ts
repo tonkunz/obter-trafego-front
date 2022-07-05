@@ -1,20 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
+import { BaseStepFormComponent } from '../base/base-step-form.component';
 
 @Component({
   selector: 'sec-step-form',
   templateUrl: 'sec-step-form.component.html'
 })
-export class SecStepComponent implements OnInit {
+export class SecStepComponent extends BaseStepFormComponent implements OnInit {
   @Input() basicSettingsData;
 
   basicSettingsForm: FormGroup;
 
   constructor(
     private _fb: FormBuilder,
-    private _location: Location,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -27,14 +28,5 @@ export class SecStepComponent implements OnInit {
       taxaRetorno: [0, [Validators.required]],
       tempoPagina: [0, [Validators.required]],
     });
-  }
-
-  handleBack(): void {
-    //TODO: Voltar para o step anterior
-    // this._location.back();
-  }
-
-  handleSubmit(): void {
-    console.log('submit');
   }
 }

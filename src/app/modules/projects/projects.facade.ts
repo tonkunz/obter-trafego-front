@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { IProject, IProjectListItem, Project, ProjectListItem, ProjectsService } from 'app/core/services';
 import { IFirstStepForm } from './crud-project/components/first-step-form/first-step-form.types';
 import { ProjectState } from './crud-project/state/project.state';
@@ -8,6 +9,7 @@ export class ProjectsFacade {
   constructor(
     private _state: ProjectState,
     private _api: ProjectsService,
+    private _router: Router,
   ) { }
 
   projectsList$ = this._state.projectList$;
@@ -55,6 +57,8 @@ export class ProjectsFacade {
           ...Project.fromJson(res),
         };
         this._state.isLoadingProject = false;
+        console.log('res: ', res);
+        this._router.navigate(['projects/edit-project/', res.id])
       });
   }
 

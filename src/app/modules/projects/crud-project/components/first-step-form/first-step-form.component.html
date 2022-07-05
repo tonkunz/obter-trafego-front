@@ -83,6 +83,7 @@
       </button>
 
       <button
+        *ngIf="!projectData.id"
         class="ml-4"
         mat-flat-button
         type="submit"
@@ -94,7 +95,24 @@
           [diameter]="20"
           class="mr-2"
         ></mat-spinner>
-        {{ "common.save" | transloco }}
+        <mat-icon
+          *ngIf="!isLoadingProject"
+          svgIcon="heroicons_outline:save"
+          class="mr-2"
+        ></mat-icon>
+        {{ "projects.create-project" | transloco }}
+      </button>
+
+      <button
+        *ngIf="projectData.id"
+        class="ml-4"
+        mat-stroked-button
+        type="button"
+        (click)="handleNext()"
+        [disabled]="isLoadingProject"
+      >
+        <mat-icon svgIcon="heroicons_outline:arrow-sm-right"></mat-icon>
+        {{ "common.next-step" | transloco }}
       </button>
     </div>
   </form>

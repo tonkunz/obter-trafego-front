@@ -13,20 +13,19 @@ import { isGoogleCode } from 'app/shared/validators/google-code.validator';
 import { IFirstStepForm } from './first-step-form.types';
 import { Location } from '@angular/common';
 import { ProjectsFacade } from 'app/modules/projects/projects.facade';
+import { BaseStepFormComponent } from '../base/base-step-form.component';
 
 @Component({
   selector: 'first-step-form',
   templateUrl: 'first-step-form.component.html',
 })
-export class FirstStepFormComponent implements OnInit, OnChanges {
+export class FirstStepFormComponent extends BaseStepFormComponent implements OnInit, OnChanges {
   @Input() projectType: ICreditItem = {
     id: 0,
     acessos: 0,
     creditos: 0,
     nome: 'Undefined',
   };
-
-  @Input() projectId: number = 0;
 
   @Input() projectData;
 
@@ -40,7 +39,9 @@ export class FirstStepFormComponent implements OnInit, OnChanges {
     private _fb: FormBuilder,
     private _location: Location,
     private _projectFacade: ProjectsFacade,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.createForm(this.projectData || null);

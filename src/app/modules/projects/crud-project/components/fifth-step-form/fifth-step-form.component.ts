@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import { BaseStepFormComponent } from '../base/base-step-form.component';
 
 @Component({
   selector: 'fifth-step-form',
   templateUrl: 'fifth-step-form.component.html'
 })
-
-export class FifthStepComponent implements OnInit {
+export class FifthStepComponent extends BaseStepFormComponent {
 
   // Lists
   referencias: string[] = [];
@@ -18,9 +18,9 @@ export class FifthStepComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  constructor() { }
-
-  ngOnInit() { }
+  constructor() {
+    super();
+  }
 
   add(event: MatChipInputEvent, collection: string): void {
     const value = (event.value || '').trim();
@@ -62,9 +62,5 @@ export class FifthStepComponent implements OnInit {
         this.referencias.splice(index, 1);
       }
     }
-  }
-
-  handleBack(): void {
-    console.log('handleBack');
   }
 }

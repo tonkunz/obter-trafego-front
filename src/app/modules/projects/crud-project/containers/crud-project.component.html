@@ -30,7 +30,7 @@
       <div class="flex items-center justify-between m-8 mr-6 sm:my-10">
         <!-- Title -->
         <div class="text-4xl font-extrabold tracking-tight leading-none">
-          {{ "projects.new-project" | transloco }}
+          {{ pageTitle | transloco }}
         </div>
 
         <!-- Close button -->
@@ -114,36 +114,63 @@
                 [projectData]="projectCompleteForm"
                 [projectType]="projectType"
                 (saveProject)="handleFirstStepForm($event)"
+                (nextStep)="handleNextStep()"
               ></first-step-form>
             </ng-container>
 
             <!-- Sec Step -->
             <ng-container *ngSwitchCase="'second-step'">
               <sec-step-form
+                (nextStep)="handleNextStep()"
+                (backStep)="handleBackStep()"
               ></sec-step-form>
             </ng-container>
 
             <!-- Third Step -->
             <ng-container *ngSwitchCase="'third-step'">
               <third-step-form
+                (nextStep)="handleNextStep()"
+                (backStep)="handleBackStep()"
               ></third-step-form>
             </ng-container>
 
             <!-- Fourth Step -->
             <ng-container *ngSwitchCase="'fourth-step'">
               <fourth-step-form
+                (nextStep)="handleNextStep()"
+                (backStep)="handleBackStep()"
               ></fourth-step-form>
             </ng-container>
 
             <!-- Fourth Step -->
             <ng-container *ngSwitchCase="'fifth-step'">
               <fifth-step-form
+                (nextStep)="handleNextStep()"
+                (backStep)="handleBackStep()"
               ></fifth-step-form>
             </ng-container>
 
           </ng-container>
         </div>
       </div>
+
+      <!-- Salvar tudo -->
+      <div
+        *ngIf="pageTitle === 'projects.manage-project'"
+        class="border-t bg-primary-50 flex justify-end"
+      >
+        <button
+          mat-flat-button
+          color="primary"
+          class="mx-2 sm:ml-auto my-2"
+          (click)="handleSaveChanges()"
+        >
+          <mat-icon class="mr-2">save</mat-icon>
+          {{ 'common.save-changes' | transloco }}
+        </button>
+      </div>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>
+
+

@@ -3,13 +3,14 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocationsService } from 'app/core/services/locations/locations.service';
 import { ILocation } from 'app/core/services/locations/locations.types';
 import { map, Observable, ReplaySubject, startWith, takeUntil } from 'rxjs';
+import { BaseStepFormComponent } from '../base/base-step-form.component';
 
 @Component({
   selector: 'fourth-step-form',
   templateUrl: 'fourth-step-form.component.html',
   styleUrls: ['./fourth-step-form.component.scss'],
 })
-export class FourthStepComponent implements OnInit, OnDestroy {
+export class FourthStepComponent extends BaseStepFormComponent implements OnInit, OnDestroy {
   @Input() locationData;
 
   locationForm: FormGroup;
@@ -25,7 +26,9 @@ export class FourthStepComponent implements OnInit, OnDestroy {
   constructor(
     private _fb: FormBuilder,
     private _locationsService: LocationsService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.createForm();
@@ -96,10 +99,6 @@ export class FourthStepComponent implements OnInit, OnDestroy {
 
   deleteLocation(locationIndex: number) {
     this.localizacoes.removeAt(locationIndex);
-  }
-
-  handleBack(): void {
-    // TODO: Voltar para o step anterior
   }
 
   handleSubmit(): void {

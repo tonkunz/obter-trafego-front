@@ -1,5 +1,5 @@
 <div class="w-full max-w-3xl">
-  <form [formGroup]="targetSettingsForm" (ngSubmit)="handleSubmit()">
+  <form [formGroup]="targetSettingsForm">
     <!-- Header -->
     <div class="w-full">
       <!-- <div class="text-xl">
@@ -124,10 +124,12 @@
 
     <div class="flex items-center justify-end">
       <button mat-stroked-button type="button" (click)="handleBack()">
+        <mat-icon svgIcon="heroicons_outline:arrow-sm-left"></mat-icon>
         {{ "common.back" | transloco }}
       </button>
 
-      <button class="ml-4" mat-flat-button type="submit" color="primary">
+      <button class="ml-4" mat-stroked-button (click)="handleNext()">
+        <mat-icon svgIcon="heroicons_outline:arrow-sm-right"></mat-icon>
         {{ "common.next-step" | transloco }}
       </button>
     </div>

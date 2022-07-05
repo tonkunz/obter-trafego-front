@@ -7,12 +7,13 @@ import {
   pairwise,
   startWith,
 } from 'rxjs';
+import { BaseStepFormComponent } from '../base/base-step-form.component';
 
 @Component({
   selector: 'third-step-form',
   templateUrl: 'third-step-form.component.html',
 })
-export class ThirdStepComponent implements OnInit, OnDestroy {
+export class ThirdStepComponent extends BaseStepFormComponent implements OnInit, OnDestroy {
   @Input() basicSettingsData;
 
   targetSettingsForm: FormGroup;
@@ -21,7 +22,9 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
 
   controllerFlag = null;
 
-  constructor(private _fb: FormBuilder) {}
+  constructor(private _fb: FormBuilder) {
+    super();
+  }
 
   ngOnInit() {
     this.createForm();
@@ -111,13 +114,5 @@ export class ThirdStepComponent implements OnInit, OnDestroy {
 
   onFocus(controller) {
     this.controllerFlag = this.targetSettingsForm.controls[controller];
-  }
-
-  handleBack(): void {
-    // TODO: Voltar para o step anterior
-  }
-
-  handleSubmit(): void {
-    console.log('submit');
   }
 }

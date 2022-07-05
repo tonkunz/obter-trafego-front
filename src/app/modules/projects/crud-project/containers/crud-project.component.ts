@@ -14,6 +14,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ProjectsFacade } from '../../projects.facade';
 import { IFirstStepForm } from '../components/first-step-form/first-step-form.types';
 import { panelOptions } from './panel-data';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'crud-project',
@@ -21,6 +22,8 @@ import { panelOptions } from './panel-data';
 })
 export class CrudProjectComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') drawer: MatDrawer;
+
+  pageTitle: string = 'projects.new-project';
 
   isLoading: boolean;
 
@@ -40,9 +43,14 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
     private _fuseMediaWatcherService: FuseMediaWatcherService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _projectsFacade: ProjectsFacade
+    private _projectsFacade: ProjectsFacade,
+    private _location: Location,
   ) {
     this.projectType = this._router.getCurrentNavigation()?.extras?.state?.credit;
+
+    if (this._router.url.includes('edit-project')) {
+      this.pageTitle = 'projects.manage-project';
+    }
 
     if (this._activatedRoute.snapshot.params['id']) {
       this._projectsFacade.setCurrentProject(this._activatedRoute.snapshot.params['id']);
@@ -106,6 +114,47 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
 
   trackByFn(index: number, item: any): any {
     return item.id || index;
+  }
+
+  handleNextStep(): void {
+    switch(this.selectedPanel) {
+      case 'first-step':
+        this.selectedPanel = 'second-step';
+        break;
+      case 'second-step':
+        this.selectedPanel = 'third-step';
+        break;
+      case 'third-step':
+        this.selectedPanel = 'fourth-step';
+        break;
+      case 'fourth-step':
+        this.selectedPanel = 'fifth-step';
+        break;
+    }
+  }
+
+  handleBackStep(): void {
+    switch(this.selectedPanel) {
+      case 'first-step':
+        this._location.back();
+        break;
+      case 'second-step':
+        this.selectedPanel = 'first-step';
+        break;
+      case 'third-step':
+        this.selectedPanel = 'second-step';
+        break;
+      case 'fourth-step':
+        this.selectedPanel = 'third-step';
+        break;
+      case 'fifth-step':
+        this.selectedPanel = 'fourth-step';
+        break;
+    }
+  }
+
+  handleSaveChanges(): void {
+    console.log('handleSaveChanges triggered');
   }
 
   // StepFormHandlers
