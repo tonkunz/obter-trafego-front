@@ -149,7 +149,17 @@ export class Project implements IProject {
       referencias: data.referencias,
       palavras: data.palavras,
       links: data.links,
-      localizacoes: data.localizacoes,
+      localizacoes: data.localizacoes.map(localizacao => ({
+        cidade: localizacao.cidade,
+        estado: localizacao.estado,
+        id: localizacao.id,
+        taxa: localizacao.taxa,
+        busca: {
+          cidade: localizacao.cidade,
+          estado: localizacao.estado,
+          id: localizacao.id,
+        }
+      }))
     };
   }
 }

@@ -102,10 +102,6 @@ export class FourthStepComponent extends BaseStepFormComponent implements OnInit
   addLocation(initData?: ILocation) {
     const locationForm = this._fb.group({
       id: [initData?.id || '', [Validators.required]],
-      // busca: [
-      //   (initData?.busca && `${initData.cidade} - ${initData.estado}`) || '',
-      //   [Validators.required],
-      // ],
       busca: [initData?.busca || '', [Validators.required]],
       cidade: [initData?.cidade || '', [Validators.required]],
       estado: [initData?.estado || '', [Validators.required]],

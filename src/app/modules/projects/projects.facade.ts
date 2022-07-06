@@ -71,6 +71,17 @@ export class ProjectsFacade {
       });
   }
 
+  // TODO: For test
+  updateCurrentProject2(): void {
+    this._state.isLoadingProject = true;
+
+    this._api.putProject(this._state.currentProject)
+      .subscribe((res) => {
+        this._state.currentProject = Project.fromJson(res);
+        this._state.isLoadingProject = false;
+      });
+  }
+
   //
   //
   // Second Step Handlers

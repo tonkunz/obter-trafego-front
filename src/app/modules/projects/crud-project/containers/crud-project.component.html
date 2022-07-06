@@ -165,8 +165,17 @@
             color="primary"
             class="mx-2 my-2 sm:mr-18"
             (click)="handleSaveChanges()"
+            [disabled]="isLoadingProject"
           >
-            <mat-icon class="mr-2">save</mat-icon>
+            <mat-spinner
+              *ngIf="isLoadingProject"
+              [diameter]="20"
+              class="mr-2"
+            ></mat-spinner>
+            <mat-icon
+            *ngIf="!isLoadingProject"
+              class="mr-2"
+            >save</mat-icon>
             {{ 'common.save-changes' | transloco }}
           </button>
         </div>

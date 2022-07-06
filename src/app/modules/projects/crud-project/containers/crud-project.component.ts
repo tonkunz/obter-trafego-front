@@ -26,6 +26,7 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
   pageTitle: string = 'projects.new-project';
 
   isLoading: boolean;
+  isLoadingProject: boolean;
 
   drawerMode: 'over' | 'side' = 'side';
   drawerOpened: boolean = true;
@@ -76,6 +77,10 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
     this._projectsFacade.isLoadingList$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((val) => this.isLoading = val);
+
+    this._projectsFacade.isLoadingProject$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((val) => this.isLoadingProject = val);
 
     // Subscribe to media changes
     this._fuseMediaWatcherService.onMediaChange$
@@ -154,7 +159,7 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
   }
 
   handleSaveChanges(): void {
-    console.log('handleSaveChanges triggered');
+    this._projectsFacade.updateCurrentProject2();
   }
 
   // StepFormHandlers
