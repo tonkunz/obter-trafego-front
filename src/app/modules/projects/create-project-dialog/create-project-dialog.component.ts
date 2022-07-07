@@ -26,7 +26,7 @@ export class CreateProjectDialogComponent implements OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<CreateProjectDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
-    private _creditsService: CreditsService
+    private _creditsService: CreditsService,
   ) {
     this._creditsService
       .getClientCredits()

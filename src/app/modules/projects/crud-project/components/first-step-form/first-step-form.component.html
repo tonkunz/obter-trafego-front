@@ -1,10 +1,10 @@
 <div class="w-full max-w-3xl">
   <!-- Form -->
-  <form [formGroup]="firstStepForm" (ngSubmit)="handleSaveProject()">
+  <form [formGroup]="firstStepForm">
     <!-- Section -->
     <div class="w-full">
       <div class="text-xl">
-        {{ ("projects.new-project" | transloco) + ' ' + projectType?.nome }}
+        {{ ("projects.new-project" | transloco) + ' ' + projectData.projetoTipo[0].nome }}
       </div>
       <div class="text-secondary">
         {{ "projects.form.subtitle" | transloco }}
@@ -83,12 +83,13 @@
       </button>
 
       <button
-        *ngIf="!projectData.id"
+        *ngIf="!projectData?.id"
         class="ml-4"
         mat-flat-button
-        type="submit"
+        type="button"
         color="primary"
         [disabled]="isLoadingProject"
+        (click)="handleSaveProject()"
       >
         <mat-spinner
           *ngIf="isLoadingProject"
@@ -104,7 +105,7 @@
       </button>
 
       <button
-        *ngIf="projectData.id"
+        *ngIf="projectData?.id"
         class="ml-4"
         mat-stroked-button
         type="button"

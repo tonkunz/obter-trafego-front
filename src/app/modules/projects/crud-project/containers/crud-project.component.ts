@@ -8,11 +8,8 @@ import {
 import { MatDrawer } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
-import { Project } from 'app/core/services';
-import { ICreditItem } from 'app/core/services/credits/credits.types';
 import { Subject, takeUntil } from 'rxjs';
 import { ProjectsFacade } from '../../projects.facade';
-import { IFirstStepForm } from '../components/first-step-form/first-step-form.types';
 import { panelOptions } from './panel-data';
 import { Location } from '@angular/common';
 
@@ -33,10 +30,6 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
   panels: any[] = panelOptions;
   selectedPanel: string = 'first-step';
 
-  projectType: ICreditItem | null;
-
-  projectCompleteForm: Project = new Project();
-
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(
@@ -47,8 +40,6 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
     private _projectsFacade: ProjectsFacade,
     private _location: Location,
   ) {
-    this.projectType = this._router.getCurrentNavigation()?.extras?.state?.credit;
-
     if (this._router.url.includes('edit-project')) {
       this.pageTitle = 'projects.manage-project';
     }
@@ -59,21 +50,6 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._projectsFacade.currentProject$
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((data) => {
-        if (data) {
-          this.projectCompleteForm = data;
-
-          this.projectType = {
-            id: data.projetoTipoId,
-            acessos: data.projetoTipo[0].acessos,
-            nome: data.projetoTipo[0].nome,
-            creditos: 0,
-          };
-        }
-      });
-
     this._projectsFacade.isLoadingList$
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((val) => this.isLoading = val);
@@ -160,20 +136,5 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
 
   handleSaveChanges(): void {
     this._projectsFacade.updateCurrentProject2();
-  }
-
-  // StepFormHandlers
-  handleFirstStepForm(formValue: IFirstStepForm): void {
-    this.projectCompleteForm = {
-      ...this.projectCompleteForm,
-      ...formValue,
-    };
-
-    if (this.projectCompleteForm?.id) {
-      this._projectsFacade.updateCurrentProject(this.projectCompleteForm);
-      return;
-    }
-
-    this._projectsFacade.createNewProject(formValue);
   }
 }

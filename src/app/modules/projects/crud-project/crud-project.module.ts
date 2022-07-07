@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { SharedModule } from 'app/shared/shared.module';
 import { CrudProjectComponent } from './containers/crud-project.component';
-import { ProjectState } from './state/project.state';
-import { ProjectsFacade } from '../projects.facade';
 
 // Material Imports
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -56,9 +54,5 @@ const routes: Route[] = [
     MatAutocompleteModule,
     MatChipsModule,
   ],
-  providers: [
-    ProjectState,
-    ProjectsFacade,
-  ]
 })
 export class CrudProjectModule {}

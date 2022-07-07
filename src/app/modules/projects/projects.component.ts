@@ -55,9 +55,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this._router.navigate(['projects/create-project'], {
-          state: { credit: result },
-        });
+        this._facade.setNewCurrentProject(result);
+        this._router.navigate(['projects/create-project']);
       }
     });
   }

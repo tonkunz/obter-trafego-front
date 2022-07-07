@@ -110,10 +110,6 @@
             <!-- First Step -->
             <ng-container *ngSwitchCase="'first-step'">
               <first-step-form
-                [projectTypeId]="projectType?.id"
-                [projectData]="projectCompleteForm"
-                [projectType]="projectType"
-                (saveProject)="handleFirstStepForm($event)"
                 (nextStep)="handleNextStep()"
               ></first-step-form>
             </ng-container>

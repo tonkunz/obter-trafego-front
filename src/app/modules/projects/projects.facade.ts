@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { ILocalizacao, IProject, IProjectListItem, Project, ProjectListItem, ProjectsService } from 'app/core/services';
 import { ILocation } from 'app/core/services/locations/locations.types';
 import { IFirstStepForm } from './crud-project/components/first-step-form/first-step-form.types';
-import { ProjectState } from './crud-project/state/project.state';
 import { IBasicSettingsData, ITargetSettingsData } from './projects.types';
+import { ProjectState } from './state/project.state';
 
 @Injectable({providedIn: 'root'})
 export class ProjectsFacade {
@@ -47,15 +47,19 @@ export class ProjectsFacade {
     this._state.currentProject = new Project();
   }
 
-  createNewProject(newProject: IFirstStepForm): void {
+  createNewProject(): void {
     this._state.isLoadingProject = true;
 
-    this._api.postProject(newProject)
+    const fistStepForm: IFirstStepForm = {
+      googleCodigo: this._state.currentProject.googleCodigo,
+      projectTypeId: this._state.currentProject.projetoTipoId,
+      siteUrl: this._state.currentProject.siteUrl,
+      titulo: this._state.currentProject.titulo,
+    }
+
+    this._api.postProject(fistStepForm)
       .subscribe((res) => {
-        this._state.currentProject = {
-          ...this._state.currentProject,
-          ...Project.fromJson(res),
-        };
+        this._state.currentProject = Project.fromJson(res);
         this._state.isLoadingProject = false;
         this._router.navigate(['projects/edit-project/', res.id])
       });
@@ -80,6 +84,45 @@ export class ProjectsFacade {
         this._state.currentProject = Project.fromJson(res);
         this._state.isLoadingProject = false;
       });
+  }
+
+  setNewCurrentProject(projectType): void {
+    this._state.currentProject = {
+      ...new Project(),
+      projetoTipo: [projectType],
+      projetoTipoId: projectType.id,
+    };
+  }
+
+  //
+  //
+  // First Step Handlers
+
+  getFirstStepInfo(): any {
+    const {
+      titulo,
+      projetoTipoId,
+      googleCodigo,
+      siteUrl,
+      projetoTipo
+    } = this._state.currentProject;
+
+    return {
+      titulo,
+      projetoTipoId,
+      googleCodigo,
+      siteUrl,
+      projetoTipo
+    }
+  }
+
+  updateFirstStepInfo(info): void {
+    this._state.currentProject = {
+      ...this._state.currentProject,
+      titulo: info?.titulo,
+      googleCodigo: info?.googleCodigo,
+      siteUrl: info?.siteUrl,
+    }
   }
 
   //

@@ -58,7 +58,7 @@ export class Project implements IProject {
   localizacoes: ILocalizacao[];
 
   constructor() {
-    this.id = null;
+    this.id = 0;
     this.titulo = '';
     this.siteUrl = '';
     this.renovacaoAutomatica = false;
