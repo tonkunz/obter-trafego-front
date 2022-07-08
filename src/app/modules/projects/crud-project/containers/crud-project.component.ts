@@ -12,6 +12,8 @@ import { Subject, takeUntil } from 'rxjs';
 import { ProjectsFacade } from '../../projects.facade';
 import { panelOptions } from './panel-data';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertSnackbarComponent } from 'app/shared/components/alert-snackbar/alert-snackbar.component';
 
 @Component({
   selector: 'crud-project',
@@ -39,6 +41,7 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
     private _activatedRoute: ActivatedRoute,
     private _projectsFacade: ProjectsFacade,
     private _location: Location,
+    private _snackBar: MatSnackBar,
   ) {
     if (this._router.url.includes('edit-project')) {
       this.pageTitle = 'projects.manage-project';
@@ -82,6 +85,8 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
   }
 
   goToPanel(panel: string): void {
+    if (this.pageTitle === 'projects.new-project') return;
+
     this.selectedPanel = panel;
 
     if (this.drawerMode === 'over') {
@@ -136,5 +141,10 @@ export class CrudProjectComponent implements OnInit, OnDestroy {
 
   handleSaveChanges(): void {
     this._projectsFacade.updateCurrentProject2();
+    this._snackBar.openFromComponent(AlertSnackbarComponent, {
+      duration: 5000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+    })
   }
 }

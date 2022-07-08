@@ -48,9 +48,11 @@
             class="flex px-8 py-5 cursor-pointer"
             [ngClass]="{
               'hover:bg-gray-100 dark:hover:bg-hover':
-                !selectedPanel || selectedPanel !== panel.id,
+                !selectedPanel || selectedPanel !== panel.id || pageTitle !== 'projects.new-project',
               'bg-primary-50 dark:bg-hover':
-                selectedPanel && selectedPanel === panel.id
+                selectedPanel && selectedPanel === panel.id,
+              'cursor-not-allowed': pageTitle === 'projects.new-project',
+              'opacity-60': pageTitle === 'projects.new-project' && panel !== 'first-step'
             }"
             (click)="goToPanel(panel.id)"
           >

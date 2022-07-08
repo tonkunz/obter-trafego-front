@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { isGoogleCode } from 'app/shared/validators/google-code.validator';
-import { Location } from '@angular/common';
 import { ProjectsFacade } from 'app/modules/projects/projects.facade';
 import { BaseStepFormComponent } from '../base/base-step-form.component';
 import { takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'first-step-form',
@@ -19,16 +19,14 @@ export class FirstStepFormComponent extends BaseStepFormComponent implements OnI
 
   constructor(
     private _fb: FormBuilder,
-    private _location: Location,
     private _facade: ProjectsFacade,
+    private _router: Router,
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.createForm(this._facade.getFirstStepInfo());
-
-    // this.projectData = this._projectFacade.getFirstStepInfo();
 
     this._facade.currentProject$
       .pipe(takeUntil(this.unsubscribeAll$))
@@ -60,6 +58,6 @@ export class FirstStepFormComponent extends BaseStepFormComponent implements OnI
   }
 
   handleBack(): void {
-    this._location.back();
+    this._router.navigate(['./projects']);
   }
 }

@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // Step Components
 import { FirstStepFormComponent } from './components/first-step-form/first-step-form.component';
@@ -53,6 +54,7 @@ const routes: Route[] = [
     MatSelectModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatSnackBarModule
   ],
 })
 export class CrudProjectModule {}
