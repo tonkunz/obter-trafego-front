@@ -16,6 +16,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
   projects: IProjectListItem[] = [];
 
+  filteredProjects: IProjectListItem[] = [];
+
   tableColumns: string[] = ['title', 'inicio', 'fim', 'status', 'actions'];
 
   searchInputControl: FormControl;
@@ -25,7 +27,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   constructor(
     private _router: Router,
     private _facade: ProjectsFacade,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {
     this.searchInputControl = new FormControl('');
   }
@@ -37,9 +39,18 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
     this._facade.projectsList$.subscribe((value) => {
       this.projects = value;
+      this.filteredProjects = value;
     });
 
     this._facade.loadProjectsList();
+
+    this.searchInputControl.valueChanges.subscribe(
+      (value: string) =>
+        (this.filteredProjects = this.projects.filter(
+          (project: IProjectListItem) =>
+            project.titulo.includes(value.toLocaleLowerCase())
+        ))
+    );
   }
 
   ngOnDestroy(): void {

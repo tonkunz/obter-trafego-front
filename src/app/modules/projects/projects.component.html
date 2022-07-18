@@ -17,6 +17,15 @@
         [autocomplete]="'off'"
         [placeholder]="'projects.search-project' | transloco"
       />
+      <button
+        *ngIf="searchInputControl.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="searchInputControl.setValue('')"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
     </mat-form-field>
 
     <!-- Add product button -->
@@ -31,13 +40,12 @@
     </button>
   </div>
 
-  .
   <!-- Page Body -->
-  <div body class="w-full">
+  <div body class="w-full overflow-visible overflow-y-auto">
+
     <!-- Products list -->
-    <div
-      class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto"
-    >
+    <div class="flex flex-col flex-auto overflow-hidden sm:overflow-y-auto">
+
       <!-- Fetching Data Loading -->
       <div
         *ngIf="isLoading"
@@ -53,7 +61,7 @@
       <!-- Result Table -->
       <table
         mat-table
-        [dataSource]="projects"
+        [dataSource]="filteredProjects"
         class="w-full p-4"
         *ngIf="!isLoading"
       >
@@ -116,7 +124,7 @@
           *matHeaderRowDef="tableColumns"
           class="bg-default"
         ></tr>
-        <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns" class=""></tr>
       </table>
     </div>
   </div>
